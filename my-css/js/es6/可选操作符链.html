@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+
+    {
+        // 作用在于方法接受参数，不需要大量的去判断值是否为空
+        // 疑问 todo 感觉这样解构赋值的作用就小了，不太理解，可能需要在应用中理解
+        function app (obj) {
+            const aa = ojb && obj.oblige && obj.oblige.work;
+            const bb = obj?.oblige?.eat
+        }
+
+        app({
+            name: '拼刀刀',
+            age: 18,
+            oblige: {
+                work: '搞卫生',
+                eat: '拉粑粑'
+            }
+
+
+        })
+    }
+</script>
+</html>

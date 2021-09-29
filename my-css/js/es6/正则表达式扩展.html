@@ -18,7 +18,7 @@
     // \s 匹配所有空白字符
     // \w 等价于[A-Za-z0-9_]
     
-    //(.*?) 非贪婪模式 .*只要匹配一次就结束
+    //(.*?) 非贪婪模式 .*只要匹配一次就结束(这个匹配一次结束是整体而言，只能意会)
     // (.*)贪婪模式 针对* +  会一直匹配到最后
     // <h1>123</h1>     reg = /<.*>/
     // 在贪婪模式下 会匹配全部 非贪婪下 会匹配<h1>
@@ -29,7 +29,7 @@
     //  实际上可以点出来groups属性
     {
         let add = `<a href="https://www.baidu.com">百度</a>`
-        const reg = /<a href="(.*)">(.*)<\/a>/
+        let reg = /<a href="(.*)">(.*)<\/a>/
         let result = reg.exec(add)
         console.log("result", result);
         // 命名捕获分组
@@ -44,8 +44,8 @@
         // 正向断言 (?=啦)还得满足啦结尾
         // const reg = /\d+(?=啦)/
         // console.log(reg.exec(add));
-        // 反向断言 (?=<么)还得满足么开头
-        const reg = /(?<=么)\d+/
+        // 反向断言 (?=<么)还得满足么开头 safari浏览器好像不支持反向 裂开
+        let reg = /(?<=么)\d+/
         console.log(reg.exec(add));
     }
 
@@ -73,6 +73,15 @@
         let reg_dot = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/s
         let result = reg_dot.exec(add)
         console.log(result);
+
+        // matchAll的用法  while循环效果是一样的reg_dot.exec(add)
+        let reg_dot_ma = /<li>.*?<a>(?<name>.*?)<\/a>.*?<p>(?<age>.*?)<\/p>.*?<\/li>/sg
+        // 下面这个用来理解贪婪模式
+        // let reg_dot_ma = /<li>.*?<a>(?<name>.*?)<\/a>.*?<p>(?<age>.*)<\/p>.*?<\/li>/sg
+        let result_ma = add.matchAll(reg_dot_ma)
+        for (const v of result_ma) {
+            console.log(v);
+        }
     }
 
 </script>

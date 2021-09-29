@@ -72,5 +72,17 @@
     const arrflat = [1,2,3,4]
     console.log(arrflat.map(a => [a]).flat()); 
     console.log(arrflat.flatMap(a => [a])); 
+
+    // ES11扩展大整形
+    {
+        // 大整形表达式定义
+        let n = 234n;
+        // 函数定义
+        let nn = BigInt(123)
+    }
+
+
+    // ES11 扩展全局This globalThis 在整合代码块里都是最上级的环境
+    console.log('globalThis', globalThis);
 </script>
 </html>

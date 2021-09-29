@@ -32,5 +32,12 @@
     console.log(m1);
     import m2 from './ES6模块化/2.js'
     console.log(m2);
+
+
+    // import的按需引入，这个只能在工程化工程才可以 以下都是伪代码
+    // btn.onclick = function () {
+    //      import返回的是Promise，失败是什么情况我也不知道,val就是暴露出来的对象
+    //      import('ES6模块化/1.js').then(val => {console.log(val)})
+    // }
 </script>
 </html>

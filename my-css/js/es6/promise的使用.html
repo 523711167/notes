@@ -90,8 +90,9 @@
         })
     }
 */
-
+/*
         {
+            // await结合async的用法
             let add = new Promise((resolve, reject) => {
                 reject()
             }).then((value) => {
@@ -124,6 +125,28 @@
             }
             heiheihei()
         }
+*/
+
+    {
+        // 
+        let app1 = new Promise((resolve, reject) => {
+            resolve("成功")
+            // reject('失败')
+        })
+        let app2 = new Promise((resolve, reject) => {
+            // resolve("成功")
+            reject('失败')
+            // throw new  Error()
+        })
+
+        // app1和app2只要执行回调，add状态为resolved，add的result为数组，包含每个Promise的返回值
+        const add = Promise.allSettled([app1, app2])
+        console.log(add)
+        // app1和app2必须通过resolved状态，ass状态为resolved，result为数组包含，反之ass状态为rejeced，result为错误的字符串
+        // 
+        const ass = Promise.all([app1, app2])
+        console.log(ass);
+    }
 </script>
 
 </html>
