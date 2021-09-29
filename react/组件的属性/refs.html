@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react使用</title>
+</head>
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="babel.min.js"></script>
+<script src="http://localhost:8097"></script>
+
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script type="text/babel">
+    /*
+        //字符串形式的refs
+        class Demo extends React.Component {
+    
+            tipDemo = () => {
+                const input1 = this.refs.input1
+                alert(input1.value)
+            }
+    
+            render() {
+                return (
+                    <div>
+                        <input ref="input1" type="text"/>
+                        <button onClick={this.tipDemo}>点击</button>
+                        <input type="text"/>
+                    </div>
+                )
+            }
+        }
+    
+        ReactDOM.render(<Demo />, document.getElementById("app"));
+    */
+
+    /*
+        //回调函数形式
+        class Demo extends React.Component {
+    
+            tipDemo = () => {
+                const input1 = this.input1
+                alert(input1.value)
+            }
+    
+            // 匿名函数this指向
+            // 通过赋值给Demo实例添加属性
+            render() {
+                return (
+                    <div>
+                        <input ref={(currentNode) => {this.input1 = currentNode}} type="text" />
+                        <button onClick={this.tipDemo}>点击</button>
+                        <input type="text" />
+                    </div>
+                )
+            }
+        }
+    
+        ReactDOM.render(<Demo />, document.getElementById("app"));
+    */
+
+    //回调函数形式
+    class Demo extends React.Component {
+
+        //为每个单独的元素需要创建一个
+        myRef = React.createRef()
+
+        tipDemo = () => {
+            const input1 = this.myRef.current
+            alert(input1.value)
+        }
+
+        // 匿名函数this指向
+        // 通过赋值给Demo实例添加属性
+        render() {
+            return (
+                <div>
+                    <input ref={this.myRef} type="text" />
+                    <button onClick={this.tipDemo}>点击</button>
+                    <input type="text" />
+                </div>
+            )
+        }
+    }
+
+    //官网提示少用ref，当 <button onClick={this.tipDemo}>点击</button>触发的时候，react会为tipDemo传入event对象
+    //通过event.target获取点击元素的属性
+    ReactDOM.render(<Demo />, document.getElementById("app"));
+
+</script>
+
+</html>

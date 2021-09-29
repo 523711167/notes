@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //解构赋值
+    const G4 = ['pdd','pxx','poo','pll']
+    let [q,w,e,r] = G4;
+
+
+    const P0 = {
+        name: '拼刀刀',
+        age: '18',
+        work: function() {
+            
+        }
+    }
+    let {name, age, work} = P0;
+
+    {
+        //模版字符串
+        let name = '拼刀刀'
+        // 1.内容可以直接换行
+        // 2.变量拼接
+        let str = `${name}亲亲亲亲亲
+                    亲亲`
+    }
+
+
+
+
+    //变量简写
+    {
+        let name = '拼刀刀'
+        let change = function() {}
+
+        const dome = {
+            name: name,
+            change: change,
+            work: function() {}
+        }
+
+        // 等价于
+        const demo1 = {
+            name,
+            change,
+            work() {}
+        }
+    }
+
+    // 解构赋值+赋值默认初始值
+    {
+        let add = function add({name="拼刀刀", age="18", username, password}) {
+            console.log("name", name)
+            console.log("username", username)
+        }
+
+        add({
+            username: "pdd",
+            password: "pxx"
+        })
+    }
+
+    // ES9 解构赋值 user对象可以接受其他参数
+    {
+        let = function add({name, age, ...user}) {
+
+        }
+
+        add({
+            username: "pdd",
+            age: 18,
+            password: "pxx",
+
+        })
+    }
+
+
+</script>
+</html>

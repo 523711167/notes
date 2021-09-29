@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+
+<script>
+    // ?通配符号 匹配0或1个字符  *通配符号 匹配0或多个字符
+
+    // .表示匹配除换行符号 *匹配0次或多次
+    // \d 匹配数字   +匹配一次或多次
+    // \s 匹配所有空白字符
+    // \w 等价于[A-Za-z0-9_]
+    
+    //(.*?) 非贪婪模式 .*只要匹配一次就结束
+    // (.*)贪婪模式 针对* +  会一直匹配到最后
+    // <h1>123</h1>     reg = /<.*>/
+    // 在贪婪模式下 会匹配全部 非贪婪下 会匹配<h1>
+    
+
+
+    // 疑问 视频的不一样的，很多属性没有,
+    //  实际上可以点出来groups属性
+    {
+        let add = `<a href="https://www.baidu.com">百度</a>`
+        const reg = /<a href="(.*)">(.*)<\/a>/
+        let result = reg.exec(add)
+        console.log("result", result);
+        // 命名捕获分组
+        let es9_reg = /<a href="(?<url>.*)">(?<target>.*)<\/a>/
+        let es9_result = es9_reg.exec(add)
+        console.log("es9_result", es9_result);
+    }
+
+    {
+        // 
+        let add = `S324234234你知道么123啦啦啦`
+        // 正向断言 (?=啦)还得满足啦结尾
+        // const reg = /\d+(?=啦)/
+        // console.log(reg.exec(add));
+        // 反向断言 (?=<么)还得满足么开头
+        const reg = /(?<=么)\d+/
+        console.log(reg.exec(add));
+    }
+
+
+    {
+        // dot 模式 //s   .可以匹配所有
+        // 全局模式  //g   自行体会吧
+        let add = `
+            <ul>
+                <li>
+                    <a>拼刀刀</a>
+                    <p>18岁</p>
+                </li>    
+                <li>
+                    <a>拼夕夕</a>
+                    <p>18岁</p>
+                </li>    
+            </ul>
+        `
+        // 我个人认为不需要加干掉贪婪模式，英文.*不匹配换行
+        let reg = /<li>\s+<a>(?<name>.*)<\/a>\s+<p>(?<age>.*)<\/p>/
+        let group = reg.exec(add).groups
+        console.log(group.name, group.age);
+        
+        let reg_dot = /<li>.*?<a>(.*?)<\/a>.*?<p>(.*?)<\/p>/s
+        let result = reg_dot.exec(add)
+        console.log(result);
+    }
+
+</script>
+</html>

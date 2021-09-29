@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // ES5和ES6对比实例化对比
+/*    {
+        function Iphone(brand, price) {
+            this.brand = brand
+            this.price = price
+        }
+
+        Iphone.prototype.call = function () {
+            console.log('我可以打电话')
+        }
+        let apple = new Iphone('apple', 8999)
+        console.log('apple', apple)
+
+
+        class ESIphone {
+            constructor(brand, price) {
+                this.price = price
+                this.brand = brand
+            }
+
+            call() {
+                console.log('我可以打电话')
+            }
+        }
+        let esapple = new ESIphone('apple','8999')
+        console.log('esapple', esapple)
+    }
+*/
+/*
+    // ES5和ES6静态变量对比
+    {
+        function Iphone(a,b,c) {}
+        //疑问 很奇怪，这些属性都在Iphone的构造函数对象
+        //解答 参考 我自己是无法在函数定义中定义其自己属性
+        Iphone.name = '手机'
+        Iphone.change = function () {
+            console.log('我可以改变世界')
+        }
+        //这个属性在Iphone的原型上
+        Iphone.prototype.size = '5.5inch'
+
+        console.log('new Iphone()', new Iphone())
+
+        class Person {
+            //等价于 Iphone.name = '手机'
+            static name = 'pdd'
+            static work = function() {
+
+            }
+        }
+        console.log('class Person', new Person());
+    }
+*/
+
+    {
+/*
+        //es5继成实现
+        function Person(age) {
+            this.age = age
+        }
+
+        Person.prototype.sleep = function() {
+            console.log('睡');
+        }
+
+        function Man(age, gender) {
+            //前面已经知道如何给构造函数添加属性  Person差不多可以理解给构造函数对象
+            //Person.call可以理解为给构造函数的this指向改变     
+            // 注意 和java继承不一样的是，Man实例居然是有age属性，同时原型对象也有age属性
+            Person.call(this, age)
+            this.gender = gender
+        }
+
+        Man.prototype = new Person()
+        // 疑问 即使干掉这一行，并且在Man的原型上没有构造函数，只有new Perosn的原型上有Person构造函数
+        // 但是居然还是赋值成功，还是会执行Man的构造函数 很奇怪
+        Man.prototype.constructor = Man
+        
+        // 此刻绑定lululu属性已经是new Person()实例,Man的prototype已经无啦
+        Man.prototype.lululu = function() {
+
+        }
+
+        console.log('new Man()', new Man());
+*/
+/*
+        // es6的类继承
+        class Person {
+            constructor(age) {
+                this.age = age
+            }
+
+            // 向原型添加方法
+            sleep() {
+                 
+            }
+        }
+
+        // 疑问 为什么new Man()的原型，也就是Person的实例没有age属性
+        class Man extends Person{
+            constructor(age, gender) {
+                super(age)
+                this.gender = gender
+            }
+
+            lululu() {
+
+            }
+        }
+        console.log('new Man(18, \'女\')', new Man(18, '女'));
+*/
+    }
+
+    {
+        class Phone {
+            // 私有属性，只有类的内部才可以访问 很好理解
+            #price;
+
+            //add.price 会访问这个方法，返回值便是add.price的值
+            get price() {
+                console.log('get price()');
+                return 'apple'
+            }
+
+            // add.price = 'banana' 会访问这个方法
+            set price(val) {
+                console.log('set price(val)');
+            }
+        }
+        let add = new Phone()
+        console.log(add.price);
+        add.price = 'banana'
+    }
+</script>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+</body>
+<script>
+    {
+        //创建symbol的两种方式
+        //symbol不可修改、不可参加运算 
+        //1
+        let a = Symbol("酱油王")
+        let b = Symbol("酱油王")
+        // 获取描述值
+        console.log(a.description);
+        //2
+        let aa = Symbol.for('酱油王')
+        let bb = Symbol.for('酱油王')
+    }
+
+    {
+        //在不知道对象属性情况下，不覆盖对象属性
+        //写法1
+        let aa = {
+            name: "拼刀刀"
+        }
+        let bb = {
+            name: Symbol("拼刀刀")
+        }
+        aa[bb.name] = "拼夕夕"
+        console.log("aa", aa)
+
+        //写法2
+        // 疑问 todo 如何读取属性pxx
+        let aaa = {
+            name: "拼刀刀",
+            [Symbol("拼夕夕")]: "拼夕夕"
+        }
+        console.log("aaa", aaa)
+    }
+
+    {
+        //Symbol 内置的11个属性使用
+
+    }
+
+    
+</script>
+</html>

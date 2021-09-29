@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    /*
+            {
+                //Promise的执行流程
+                let add = new Promise((resolve, reject) => {
+                    //执行异步任务 ,如果调用resolve方法，就会执行Promise的then方法的第一个成功回调
+                    //如果调用reject方法，执行Promise的then方法的第二个回调
+                    setTimeout(() => {
+                        resolve(222)
+                    }, 2000);
+                })
+        
+                add.then((value) => {
+                    console.log(value)
+                }, (error) => {
+        
+                })
+                console.log(111)
+            }
+    */
+    /*
+        {
+            //resolve执行，pendding => resolved
+            //reject执行, pendding => rejected
+            let add = new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve(100)
+                }, 2000);
+            })
+    
+            //resolve和reject回调函数返回非Promise对象，then返回的是resolved状态的Promise对象
+            //resolve和reject回调函数返回Promise对象, then返回Promise对象状态由return的Promise对象自己控制
+            let abb = add.then(
+                (data) => {
+                    // throw 123
+                    // 如果抛出异常，则返回rejected状态的Promise对象
+                    return new Promise((resolve, reject) => {
+                        setTimeout(() => {
+                            resolve()
+                        }, 5000);
+                    })
+                },
+                (err) => {
+    
+                })
+            console.log('abb', abb)
+        }
+    */
+
+/*
+    {
+        new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('我在吃饭')
+            }, 1000);
+        }).then((value) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve([value, '我在运动'])
+                }, 1000);
+            })
+        },(err) => {
+
+        }).then((value) => {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    resolve([...value, '我在睡觉'])
+                }, 1000);
+            })
+        }, (err) => {
+
+        }).then((value) => {
+            console.log(value)
+        }, (err) => {
+
+        })
+    }
+*/
+
+        {
+            let add = new Promise((resolve, reject) => {
+                reject()
+            }).then((value) => {
+                console.log('success')
+            }).catch((err) => {
+                console.log('error')
+            })
+            //等价于
+            new Promise((resolve, reject) => {
+                reject()
+            }).then((value) => {
+                console.log('success')
+            }, (err) => {
+                console.log('error')
+            })
+            //等价于
+            function addd() {
+                return new Promise((resolve, reject) => {
+                    resolve('等价于上面写法')
+                })
+            }
+     
+            async function heiheihei() {
+                try {
+                    let a = await addd()
+                    console.log(a)
+                } catch (error) {
+                    console.log(error)
+                }
+            }
+            heiheihei()
+        }
+</script>
+
+</html>

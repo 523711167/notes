@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    //对象的原型上实现Symbol(Symbol.iterator)属性对应的方法，便可以用forv遍历
+    {
+        let a = [1,2]
+        console.log(a)
+        //返回一个迭代器对象，具有next方法
+        console.log("a[Symbol.iterator]()", a[Symbol.iterator]())
+        let iter = a[Symbol.iterator]();
+        console.log(iter.next())
+        console.log(iter.next())
+        console.log(iter.next())
+        console.log(iter.next())
+        console.log(iter.next())
+        console.log(iter.next())
+    }
+
+    {
+        //通过添加key为Symbol.iterator，value为包含next方法的function，实现自定义遍历任何对象
+        //不知道为什么会死循环！！！
+        let a = {
+            name: "拼刀刀",
+            alias: [
+                '贼有钱',
+                '贼健康',
+                '贼开心'
+            ],
+            [Symbol.iterator]() {
+                let index = 0
+                return {
+                    next: () => {
+                        if (this.alias.length > index) {
+                            let val = {value: this.alias[index], done: false}
+                            index++
+                            return val
+                        } else {
+                            return {value: undefined, done: false}
+                        }
+                    }
+                }
+            }
+        }
+        for (const iterator of a) {
+            console.log('iterator', iterator)
+        }
+    }
+
+</script>
+</html>

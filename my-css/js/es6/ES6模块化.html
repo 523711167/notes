@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script type="module">
+    /*
+    // 分别暴露
+    import * as m1 from './ES6模块化/1.js'
+    console.log('分别暴露', m1)
+    // 默认暴露
+    import * as m2 from './ES6模块化/2.js'
+    console.log('默认暴露', m2)
+    // 统一暴露
+    import * as m3 from './ES6模块化/3.js'
+    console.log('分别暴露', m3)
+    */
+    // 解构赋值 对应分别暴露和统一暴露
+    import {name, work} from './ES6模块化/1.js'
+    console.log(name, work);
+    import {name as name1, work as work1} from './ES6模块化/3.js'
+    console.log(name1, work1);
+    
+    // 默认暴露 
+    import {default as m1} from './ES6模块化/2.js'
+    console.log(m1);
+    import m2 from './ES6模块化/2.js'
+    console.log(m2);
+</script>
+</html>

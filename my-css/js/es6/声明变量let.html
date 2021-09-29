@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let f = 521, g = 'woshinibaba'
+    console.log(f)
+    // 1. 同一作用域内，变量不可以重复声明
+    {
+        let f = 200
+        console.log('let f = 200',f)
+    }
+    // 2. 块级作用域
+    // 3. 不存在变量提升
+    // 4. 不影响作用域链
+    {
+        let f = 2000
+        // safari浏览器下add会提升了全局的add，会挂载在windows对象下，
+        // Google浏览器则不会出现这种情况，就只在局部的作用域内
+        function add() {
+            f = f + 1
+            console.log(f)
+        }
+        add()
+
+        let hh = 20000
+        function adda() {
+            hh = hh + 1
+            console.log('hh', hh)
+        }
+        adda()
+        console.log('hh',hh)
+        console.log('f',f)
+    }
+</script>
+</html>

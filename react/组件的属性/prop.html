@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react使用</title>
+</head>
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="node_modules/prop-types/prop-types.min.js"></script>
+<script src="babel.min.js"></script>
+<script src="http://localhost:8097"></script>
+
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script type="text/babel">
+    class Weather extends React.Component {
+
+        state = { isHot: false }
+
+        changeWeather = () => {
+            this.setState({ isHot: !this.state.isHot })
+        }
+
+        render() {
+            console.log(this)
+            //props 传递值 方式1
+            // return <h1 onClick={this.changeWeather}>{this.props.date}今天天气很{this.state.isHot ? '炎热' : '寒冷'}</h1>
+
+            //props 传递值 方式2
+            return (
+                <div>
+                    <h1 onClick={this.changeWeather}>{this.props.tim}今天天气很{this.state.isHot ? '炎热' : '寒冷'}</h1>
+                    <ul>
+                        <li>{this.props.age}</li>
+                    </ul>
+                </div>
+            )
+        }
+
+        //第二种写法
+        static propTypes = {
+            age: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+            work: PropTypes.func
+        }
+
+        static defaultProps = {
+            age: 20
+        }
+    }
+
+/*    
+    第一种写法
+    //props 类型验证
+    Weather.propTypes = {
+        age: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        work: PropTypes.func
+    }
+
+    Weather.defaultProps = {
+        age: 20
+    }
+*/
+
+
+    //方式1
+    // ReactDOM.render(<Weather date="2021-09-20"/>, document.getElementById("app"));
+
+    //方式2
+    //批量传递
+    const p = { tim: "2021-09-20" }
+    ReactDOM.render(<Weather  {...p} />, document.getElementById("app"));
+
+/*
+    //函数式组件可以接受props
+    function Weather(props) {
+        return (
+            <ul>
+                <li>{this.props.time}</li>
+            </ul>
+        )
+    }
+
+*/
+</script>
+
+</html> 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title> 
+</head>
+<body>
+    
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+<script>
+ //reset参数   
+{
+    let add = function add(...args) {
+        //args为数组值
+        console.log("args", args)
+    }
+    add(1,2,3,4,5,6,7)
+}
+
+//扩展运算符号
+//使用场景1.把[1,2,3,4,5,6,6,7]展开a,b,c,d,e,f,g,h作为参数
+{
+    let a = [1,2,3,4,5,6,6,7]
+    let add = function add() {
+        //arguments类似数组
+        console.log(arguments)
+    }
+    add(...a) // 等价于add(a,b,c,d,e,f,g,h)
+}
+//使用场景2. [1, 2]合并[3, 4]为[1，2, 3, 4]
+{
+    let a = [1,2]
+    let b = [3,4]
+    console.log('...a, ...b', [...a, ...b])
+    //疑问 todo 不知道这种展开是啥， 有点类似参数列表
+    console.log('...a', ...a)
+}
+//使用场景3. 拷贝复制a和b完全独立，aa和bb同一个引用地址
+{
+    let a = [1,2]
+    let b = [...a]
+    console.log("[1, 2] === [...a]", a === b) // false
+    a[0] = 222222
+    console.log("a", a)
+    console.log("b", b)
+
+    //如果是复制对象，复制对象引用
+    let aa = [{name: "pdd"}]
+    let bb = [...aa]
+    console.log("[{name: \"pdd\"}] === [...aa]", a === b) // false
+    aa[0].name = "拼刀刀"
+    console.log("aa", aa)
+    console.log("bb", bb)
+}
+
+// 使用场景4. 伪数组转数组
+{
+    const divs = document.querySelectorAll('div')
+    const divsArr = [...divs]
+    console.log('divsArr', divsArr)
+}
+
+// ES6不可以展开对象，ES6参数列表转数组，还有情况4
+// 我搞错了ES9的reset运算符号，不是展开对象的 
+// 合并对象属性，对象合并的肯定是引用，基本类型就是值，有点类似Object.assign()
+{
+    let add = {name: '拼刀刀', age: 18}
+    let pdd = {username: '拼刀刀', password: 18}
+    // 合并属性
+    console.log({...add, ...pdd});
+}
+
+</script>
+</html>

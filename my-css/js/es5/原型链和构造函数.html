@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+/*     
+        // 原型
+        // 函数也是对象的一种形式
+        // 函数都有一个特殊的默认属性prototype, Person.prototype获取
+        // 通过new Person(),可以创建Person函数的实例，
+        // 实例中通过__proto_属性和函数默认prototype属性对应的对象建立了关联
+    
+        {
+            // person是一个实例化对象
+            // person.__proto__和Person.prototype 为同一个对象，命名为原型对象。
+            // 在这个对象上也有__proto__属性，和Object.prototype为同一个对象。
+            // 疑问已解决  我自己是无法在函数定义中定义其自己属性，但是在Person.prototype的对象的constructor属性对应的对象中发现了自己的属性，很奇怪
+            // 解答 我们可以通过Person.name 在他的构造函数对象上定义属性
+            function Person(){
+               
+            };
+            Person.prototype.name = '我是Person函数对象prototype属性的对象，也可以说Person实例的原型对象的属性name'
+            let person = new Person()
+            person.name = '我是Person实例属性name'
+            console.log(Person.prototype);
+            //Object.create(person)) 方法创建已person实例为原型的实例对象
+            console.log('Object.create(person)', Object.create(person)); 
+        }
+    
+        {
+            //一种特殊的创建实例的方式
+            function Person() {
+    
+            }
+            console.log('Person.prototype.constructor', Person.prototype.constructor);
+            console.log('Person.prototype.constructor', new Person.prototype.constructor());
+        }
+*/   
+
+/*
+     {
+        // 原型链 this 指向
+        let o = {
+            name: '拼刀刀',
+            m(){
+                return `${this.name}必定牛批`
+            }
+        }
+        console.log('o.m()', o.m());
+
+        let father_o = Object.create(o)
+        father_o.name = '拼夕夕'
+        console.log('father_o.m()', father_o.m());
+     }     
+*/     
+
+    {
+        // 函数都继承于 Function.prototype
+        // (Function.prototype 中包含 call, bind等方法)
+        // 原型链如下:
+        // f ---> Function.prototype ---> Object.prototype ---> null
+        // 疑问 todo 我通过查看发现的原型是Object.prototype，很奇怪，和文章说的不一样呢
+        // 而且直接打印出来只有函数定义本身
+        let f = function () {
+            return 2;
+        }
+        console.log('f', Function.prototype);
+    }
+</script>
+
+</html>

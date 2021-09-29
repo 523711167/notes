@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // async特点
+    let add = async function add() {
+        // 不处理return的结果或不返回Promise对象的时候，执行函数
+        // 返回一个resolved状态的Promise， Promise值为return值
+        // return 1
+        // 返回一个Promise对象时候，Promise状态由Promise内部决定
+        return new Promise((resolve, reject) => {resolve('success')})
+        // 如果抛出异常，返回一个rejected状态的Promise对象
+        // throw 1
+    }
+
+    // await特点 主要是用于干掉then方法中的回调函数，可以使方法看起来更像同步方法  
+    async function test() {
+        try {
+            let success = await add()
+            console.log(success)
+        } catch (error) {   
+            console.log(error)
+        }
+    }
+    test()
+</script>
+
+</html>

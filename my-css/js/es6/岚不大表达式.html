@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // 1. this的指向只和函数声明所在作用域有关
+    {
+        let a = 1;
+        if (1 === 1) {
+            let a = 2
+            let add = () => {
+                console.log(a)
+            }
+            add()
+        }
+    }
+    // 2. this的指向不可修改
+    {
+        let a = 100
+        let a_def = {
+            a: 2000
+        }
+
+        //this.a 通过this找到a a 会通过作用域链找属性
+        let add = () => {
+            console.log(a)
+        }
+        
+        //safari 不会提升addd为全局
+        let addd = function addd() {
+            console.log(a)
+        }
+
+        add()
+        addd()
+
+        add.apply(a_def)
+        addd.apply(a_def)
+    }
+    // 3.不可以构造实例化对象 不是很懂
+    // 4.没有arguments属性
+</script>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react使用</title>
+</head>
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="babel.min.js"></script>
+<script src="http://localhost:8097"></script>
+
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script type="text/babel">
+    /*
+        //组件的state属性
+        class Weather extends React.Component {
+    
+            constructor(prop) {
+                super(prop)
+                this.state = {isHot: false}
+                //原型上的changeWeather通过bind修改this指向，然后赋值给实例属性
+                this.changeWeather = this.changeWeather.bind(this)
+            }
+            // 方法中的this丢失
+            // 类中的方法默认开启了严格模式，react中并不是Weather的实例调用，所以为undefined
+            changeWeather() {
+                this.setState({isHot: !this.state.isHot})
+             }
+    
+            render() {
+                return <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热': '寒冷'}</h1>
+            }
+        }
+    */
+
+    // 第二种简写方式
+    class Weather extends React.Component {
+        //不理解这种写法转ES5的实现效果
+        state = { isHot: false }
+
+        // lambal表达式的this不理解
+        changeWeather = () => {
+            this.setState({ isHot: !this.state.isHot })
+        }
+
+        render() {
+            return <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '寒冷'}</h1>
+        }
+    }
+    ReactDOM.render(<Weather />, document.getElementById("app"));
+
+</script>
+
+</html>

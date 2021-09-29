@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const SCHOOL = 'pdd'
+    //为什么没有挂载到windows对象上
+    const HH = 2000
+    // var可以挂载到windows对象上
+    var i = 100
+
+    // 1.需要初始值
+    // 2.一般大写
+    // 3.不可修改
+    // 4.块级别作用域
+    // google浏览器会向外围找变量，safari直接找最外层变量
+    {
+        const HH = 200
+        function add() {
+            console.log(this)
+            console.log(this.HH)
+        }
+        add()
+        console.log(this)
+        console.log(this.HH)
+    }
+    // 5.对象和数据可以修改数据
+</script>
+</html>

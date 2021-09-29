@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    {
+        //生成器函数,异步回调的新实现方案，通过iterator.next()执行
+        let add = function * () {
+            console.log(this)
+        }
+
+        //调用add()，返回一个迭代器
+        let iterator = add()
+        iterator.next()
+    }
+
+    {
+        let add = function * () {
+            // |
+            // |
+            // 第一阶段
+            // |
+            // |
+            yield '拼刀刀'
+            // ｜
+            // ｜
+            // 第二阶段
+            // ｜
+            // ｜
+            yield '拼夕夕'
+            // ｜
+            // ｜
+            // 第三阶段
+            // ｜
+            // ｜
+            yield '拼啊啊'
+            // ｜
+            // ｜
+            // 第四阶段
+            // ｜
+            // ｜
+        }
+
+        //yield作为iterator.next的返回值
+        let iterator = add()
+        console.log(iterator.next())
+        for (const a of iterator) {
+            console.log('a', a)
+        }
+    }
+
+
+
+    {
+        //不知道怎么表述
+        let add = function(sub) {
+            console.log(sub)
+            let aa = yield 111
+            console.log(sub + aa)
+            let bb = yield 222
+        }
+        let iterator = add('aaa')
+        iterator.next('bbb')
+    }
+
+    {
+        //搞个Dome 只可意会
+        //1.网上买票 2.查询订单 3.拿票进站
+        let add = function * (money) {
+            let piao = '123456'
+            let numb = yield piao
+            let status = true
+            let ticket = yield status
+            let go = true
+        }
+
+        let iterator = add(100)
+        let numb = iterator.next().value
+        let status = iterator.next(numb).value
+        let go = iterator.next('北京到广州').value
+    }
+
+</script>
+</html>

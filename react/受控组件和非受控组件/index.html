@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react使用</title>
+</head>
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="babel.min.js"></script>
+<script src="http://localhost:8097"></script>
+
+<body>
+    <div id="app">
+
+    </div>
+</body>
+<script type="text/babel">
+    /*   
+       //受控组件
+       class Demo extends React.Component {
+   
+           run = (event) => {
+               event.p
+               alert(`${this.username.value}-------${this.password.value}`)
+           }
+   
+           //思路：在每个html元素渲染的时候，把元素属性绑定到ref上，在其他操作中取出
+           render() {
+               return (
+                   <div>
+                       <form action="#">
+                           用户：<input ref={(c) => {this.username = c}} type="text" name="username"/>
+                           密码：<input ref={(c) => {this.password = c}} type="password" name="password"/>
+                           <button onClick={this.run}>点击</button>    
+                       </form>
+                   </div>
+               )
+           }
+       }
+   
+       ReactDOM.render(<Demo />, document.getElementById("app"));
+   
+   */
+
+    //非受控组件
+    class Demo extends React.Component {
+
+        state = {
+            username: '',
+            password: ''
+        }
+
+
+        run = (event) => {
+            console.log(this)
+            alert(`${this.state.username}-------${this.state.password}`)
+        }
+
+        saveUsername = (e) => {
+            this.setState({username: e.target.value})
+        }
+
+        svaePassword = (e) => {
+            this.setState({password: e.target.value})
+        }
+
+        //思路：在每个html元素渲染的时候，把元素属性绑定到state上，在其他操作中取出
+        render() {
+            return (
+                <div>
+                    <form action="#">
+                        用户：<input onChange={this.saveUsername} type="text" name="username" />
+                        密码：<input onChange={this.svaePassword} type="password" name="password" />
+                        <button onClick={this.run}>点击</button>
+                    </form>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Demo />, document.getElementById("app"));
+
+</script>
+
+</html>

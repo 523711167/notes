@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react使用</title>
+</head>
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="babel.min.js"></script>
+<body>
+<div id="app">
+
+</div>
+</body>
+<script type="text/babel">
+    //挂载时--->constructor--->getDerivedStateFromProps---> shouldComponentUpdate --->render ---> componentDidMount
+    //setState---> getDerivedStateFromProps---> shouldComponentUpdate ---> render ---> getSnapshotBeforeUpdate ---> componentDidUpdate
+    //forceUpdate---> getDerivedStateFromProps---> render ---> getSnapshotBeforeUpdate ---> componentDidUpdate
+    //New props---> getDerivedStateFromProps---> shouldComponentUpdate ---> render ---> getSnapshotBeforeUpdate ---> componentDidUpdate
+    
+
+
+    //父组件发生render，子组件没有修改也会发生render
+    //子组件发生render，父组件不变
+    class A extends React.Component {
+
+        constructor(props) {
+            console.log("A-----constructor")
+            super(props)
+        }
+
+        //props： 传过来的props
+        //state： 初始化的状态
+        //返回的值不知道怎么说 意会吧
+        static getDerivedStateFromProps(props, state) {
+            console.log("A-----getDerivedStateFromProps", props, state)
+            return null;
+        }
+
+        shouldComponentUpdate() {
+            console.log("A-----shouldComponentUpdate")
+            return true
+        }
+
+        componentDidUpdate(preProps, preState, snap) {
+            console.log("A-----componentDidUpdate", preProps, preState, snap)
+        }
+        componentDidMount() {
+            console.log("A-----componentDidMount")
+        }
+
+        getSnapshotBeforeUpdate() {
+            console.log("A-----getSnapshotBeforeUpdate")
+            return "pdd"
+        }
+
+
+        state = {
+            car: '奥迪',
+            myCar: '小沙雕'
+        }
+
+        render() {
+            console.log("A---render")
+            return (
+                <div>
+                    <h1>我开奔驰{this.state.myCar}</h1>
+                    <B carName={this.state.car}/>
+                    <button onClick={(e) => {this.setState({car: "沃尔沃"})}}>我要换车了</button>
+                    <button onClick={(e) => {this.setState({car: "大沙雕"})}}>我要换小沙雕</button>
+                </div>
+            )
+        }
+    }
+
+    class B extends React.Component {
+
+        state = {
+                car: '劳斯莱斯'
+        }
+
+        constructor(props) {
+            console.log("B-----constructor")
+            super(props)
+        }
+
+        static getDerivedStateFromProps(props, state) {
+            console.log("B-----getDerivedStateFromProps", props, state)
+            return null;
+        }
+
+        shouldComponentUpdate() {
+            console.log("B-----shouldComponentUpdate")
+            return true
+        }
+
+        componentDidUpdate(preProps, Prestate, snap) {
+            console.log("B-----componentDidUpdate", preProps, Prestate, snap)
+        }
+
+        componentDidMount() {
+            console.log("B-----componentDidMount")
+        }
+
+        getSnapshotBeforeUpdate() {
+            console.log("B-----getSnapshotBeforeUpdate")
+            return "pdd"
+        }
+
+        render() {
+            console.log("B-----render")
+            return (
+                <div>
+                    <h1>我准备再买{this.props.carName}</h1>
+                    <h1>{this.state.car}</h1>
+                    <button onClick={() => {this.setState({car: '自行车'})}}>子组件单独更新</button>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<A />, document.getElementById("app"))
+</script>
+</html>
