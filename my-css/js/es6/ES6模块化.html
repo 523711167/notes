@@ -21,18 +21,26 @@
     import * as m3 from './ES6模块化/3.js'
     console.log('分别暴露', m3)
     */
+   /*
     // 解构赋值 对应分别暴露和统一暴露
     import {name, work} from './ES6模块化/1.js'
     console.log(name, work);
     import {name as name1, work as work1} from './ES6模块化/3.js'
     console.log(name1, work1);
-    
+    */
+   /*
     // 默认暴露 
     import {default as m1} from './ES6模块化/2.js'
     console.log(m1);
     import m2 from './ES6模块化/2.js'
     console.log(m2);
-
+    */
+   
+    //默认暴露和分别暴露可以混合使用
+    import add from './ES6模块化/4.js'
+    import {work} from './ES6模块化/4.js'
+    console.log(add);
+    console.log(work);
 
     // import的按需引入，这个只能在工程化工程才可以 以下都是伪代码
     // btn.onclick = function () {
