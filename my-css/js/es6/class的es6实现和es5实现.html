@@ -63,9 +63,9 @@
         console.log('class Person', new Person());
     }
 */
-
-    {
 /*
+    {
+
         //es5继成实现
         function Person(age) {
             this.age = age
@@ -79,6 +79,7 @@
             //前面已经知道如何给构造函数添加属性  Person差不多可以理解给构造函数对象
             //Person.call可以理解为给构造函数的this指向改变     
             // 注意 和java继承不一样的是，Man实例居然是有age属性，同时原型对象也有age属性
+            // new Man()下this指向的是自己
             Person.call(this, age)
             this.gender = gender
         }
@@ -94,7 +95,7 @@
         }
 
         console.log('new Man()', new Man());
-*/
+/
 /*
         // es6的类继承
         class Person {
@@ -122,7 +123,7 @@
         console.log('new Man(18, \'女\')', new Man(18, '女'));
 */
     }
-
+/*
     {
         class Phone {
             // 私有属性，只有类的内部才可以访问 很好理解
@@ -143,5 +144,6 @@
         console.log(add.price);
         add.price = 'banana'
     }
+*/    
 </script>
 </html>

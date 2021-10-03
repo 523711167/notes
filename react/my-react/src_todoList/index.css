@@ -1,0 +1,16 @@
+input,textarea {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box; /* Firefox */
+	-moz-box-sizing: border-box; 	/* Safari */
+}
+
+#pmm {
+	width: 150px;
+	border-radius: 10px;
+	background-color: #428bca;  
+	text-align: center;  
+	vertical-align: middle;  
+	border-color: #357ebd;  
+	color: fff;
+	border: 1px solid ;  
+}

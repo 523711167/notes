@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .pxx {
+        width: 200px;
+        height: 50px;
+    }
+    #pdd {
+        display: flex;
+        flex-direction: row;
+        border: 1px solid black;
+        width: 400px;
+        height: 200px;
+        flex-wrap: nowrap;
+    }
+</style>
+<body>
+    
+    <div id="pdd">
+        <div class="pxx" style="background-color: red;">1</div>
+        <div class="pxx" style="background-color: blue;">2</div>
+        <div class="pxx" style="background-color: pink;">3</div>
+    </div>
+</body>
+<script>
+    // display: 
+    //      flex      设置flex容器
+    //      inline-flex 设置行内flex容器
+    // flex元素的默认值
+    // justify-content: flex-start;
+    // flex-direction: row; 
+    // flex-grow: 0; 
+    // flex-shrink: 1;
+    // align-items: stretch;
+    // flex-basic:auto;
+    // flex-warp:nowarp flex元素沿主轴方向长度超出flex容器，不换行
+
+
+    // flex-direction 
+    //      row row-reserve column column-reserve 
+    // row 主轴沿inline方向延伸(水平),主轴的起始线是右边，终止线是左边
+    // row-reserve 
+    // column 主轴沿block方向延伸(上下), 主轴的起始线是上边，终止线是下边
+    // column-reserve
+
+    // flex-warp
+    //      warp 子元素沿主轴方向排列长度超过flex容器，子元素换行
+    //      nowarp (注：在设置flex元素不缩小，会超出flex容器沿主轴方向长度）
+
+    
+    // flex-basic flex元素属性
+    //      px  设置元素沿主轴方向的长度
+    //      auto 长度为元素内容长度
+    //      content 疑问 todo 好像和auto一样
+
+    // flex-grow flex元素属性 
+    //      设置flex元素沿主轴方向增长系数
+
+    // flex-shrink flex元素属性 
+    //      1 收缩
+    //      0 不收缩
+
+    // align-items flex元素沿交叉轴的排列方式
+    //      stretch 默认   flex容器的高度
+    //      flex-start    沿主轴起点排列
+    //      flex-end      沿主轴终点排列
+    //      center        沿主轴中点排列
+
+    // justify-content 主轴方向上排列方式
+    //      flex-start   沿主轴起点排列
+    //      flex-end     沿主轴终点排列
+    //      center       居中排列
+    //      space-around  元素左右相等排列
+    //      space-between 等距排列
+
+
+    // 组合属性
+    // flex-flow 
+    //      flex-direction
+    //      flex-warp
+
+    // flex 
+    //      flex-grow
+    //      flex-shrink
+    //      flex-basis
+</script>
+</html>

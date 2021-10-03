@@ -1,0 +1,4 @@
+/* 样式的模块化 */
+/* 1.修改文件名字index.moudle.css */
+/* 2.引入样式为import hello from ‘./index.moudle.css’ */
+/* <a className={hello.title}></a> */
