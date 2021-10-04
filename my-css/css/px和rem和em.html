@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+
+    html {
+        font-size: 16px;
+    }
+
+    body {
+        /* 默认设置font-size为10px，方便计算 */
+        font-size: 62.5%;
+    }
+
+    div > p:nth-child(1) {
+        font-size: 2em;
+    }
+
+    div > p:nth-child(2) {
+        font-size: 3em;
+    }
+
+    div > p:nth-child(3) {
+        font-size: .666em;
+    }
+
+    div > p:nth-child(4) {
+        font-size: 1.25rem;
+    }
+</style>
+<body>
+    <div>
+        <p>我是两倍的em</p>
+        <p>我是三倍的em</p>
+    </div>
+
+    <div style="font-size: 3em;">
+        <p>我继承了三倍的em，必须要重新计算</p>
+        <p></p>
+        <p>我继承了三倍的em，必须要重新计算,目标为body的两倍em，所以需要设置.666</p>
+        <p>我是使用了rem单位的元素，只以html元素设置的字体大小为准</p>
+    </div> 
+</body>
+</html>

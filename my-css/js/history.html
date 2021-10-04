@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script type="text/javascript" src="https://cdn.bootcss.com/history/4.7.2/history.js"></script>
+</head>
+<body>
+
+    <button onclick="push('/pdd')">跳转pdd</button>
+    <button onclick="push('/pxx')">跳转pxx</button>
+    <button onclick="replace('/pww')">replace pww</button>
+
+    <button onclick="forward()">前进</button>
+    <button onclick="goback()">退回</button>
+</body>
+<script>
+		// let history = History.createBrowserHistory() //方法一，直接使用H5推出的history身上的API
+		let history = History.createHashHistory() //方法二，hash值（锚点）
+        // 类似这种<a href="#pdd"></a> 
+
+    function push(path) {
+        history.push(path)
+    }
+
+    function forward() {
+        history.goForward()
+    }
+
+    function goback() {
+        history.goBack()
+    }
+
+    function replace(path) {
+        history.replace(path)
+    }
+
+    history.listen((location) => {
+			console.log('请求路由路径变化了', location)
+    })
+</script>
+</html>

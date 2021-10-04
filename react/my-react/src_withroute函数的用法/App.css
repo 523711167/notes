@@ -1,0 +1,12 @@
+.pxx-nav-link {
+    font-size: 20px;
+    line-height: 20px;
+    text-decoration: none;
+    color: white;
+    padding: 10px 15px;
+    border: 1px solid red;
+}
+
+a:hover {
+    text-decoration: none;
+}

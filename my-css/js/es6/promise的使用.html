@@ -13,14 +13,13 @@
 </body>
 
 <script>
-    /*
-            {
+/*             {
                 //Promise的执行流程
                 let add = new Promise((resolve, reject) => {
                     //执行异步任务 ,如果调用resolve方法，就会执行Promise的then方法的第一个成功回调
                     //如果调用reject方法，执行Promise的then方法的第二个回调
                     setTimeout(() => {
-                        resolve(222)
+                        // resolve(222)
                     }, 2000);
                 })
         
@@ -29,10 +28,9 @@
                 }, (error) => {
         
                 })
-                console.log(111)
-            }
-    */
-    /*
+                console.log(add)
+            } */
+/* 
         {
             //resolve执行，pendding => resolved
             //reject执行, pendding => rejected
@@ -59,8 +57,7 @@
                 })
             console.log('abb', abb)
         }
-    */
-
+ */
 /*
     {
         new Promise((resolve, reject) => {
@@ -90,7 +87,6 @@
         })
     }
 */
-/*
         {
             // await结合async的用法
             let add = new Promise((resolve, reject) => {
@@ -125,9 +121,7 @@
             }
             heiheihei()
         }
-*/
-
-    {
+/*     {
         // 
         let app1 = new Promise((resolve, reject) => {
             resolve("成功")
@@ -147,6 +141,7 @@
         const ass = Promise.all([app1, app2])
         console.log(ass);
     }
+     */
 </script>
 
 </html>
