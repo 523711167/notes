@@ -1,0 +1,98 @@
+// 我是不会被编译的
+
+/* 我会被编译为css的 */
+
+// less基础
+// 变量可以定义3种类型
+@gao: 100px;
+@key: margin;
+@i: 1;
+.box@{i} {
+    height: @gao;
+    width: @gao;
+    @{key}: 20px;
+}
+// less的变量可以提升
+.box {
+    height: @gao;
+    @gao: 200px;
+    width: @gao;
+}
+// less嵌套元素和伪类的用法
+div {
+    ul {
+        li {
+            list-style: none;
+            text-decoration: none;
+        }
+        &:hover {
+            background-color: #eee;
+        }
+    }
+}
+
+// less 变量的加减乘除
+.div5 {
+    @num: 100px;
+    height: @num - 10;
+    width: @num + 10;
+}
+// less 内置函数 四舍五入 百分比 开方
+.div6 {
+    width: round(8.2px);
+    height: percentage(0.5);
+    margin: sqrt(25px);
+}
+// less 混入
+// 通过()不会被单独解析,整体可以作为变量
+// 还可以和func有形参,作为变量
+// sass也可以混入通过@mixin show(){} ,使用@include show(#EEE)
+.show(@mm) {
+    height: 100px;
+    width: 100px;
+    border: 1px solid red;
+    background-color: @mm;
+}
+.box7 {
+    .show(#eee)
+}
+// less 命名空间
+// 定义space命令空间
+#space() {
+    .case1 {
+        background-color: orange;
+    }
+    .case2 {
+        background-color: #eee;
+    }
+}
+// 使用命名空间
+.div8 {
+    #space.case2;
+}
+
+// less 继承
+// 定义line
+// sass 通过.line {}或%line {}定义, 通过@extend .line;或者@extend %line;使用
+.line {
+    text-decoration: none;
+    list-style: none;
+}
+// 继承line
+.div9 {
+    &:extend(.line);
+}
+
+// less 条件判断
+// @pp大于100混入，小于不混入
+.goshow(@pp) when(@pp > 100) {
+    height: 100px;
+    width: 100px;;
+}
+.div10 {
+    background-color: #fff;
+    .goshow(50)
+}
+
+// less导入
+ @import './pdd.less';

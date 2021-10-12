@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    //  变量提升定义，而不是赋值
+/*     function f1(a) {
+        console.log(a);
+        var a=1;
+        console.log(a);
+        console.log(arguments[0]);
+    }
+    f1(10)
+
+    // a都是同一个只不过是赋值多次，声明多次
+    function f3(a) {
+        var a;
+        console.log(a); 
+        console.log(a);
+        console.log(arguments[0])
+    }
+    f3(10) */
+
+    // 在js中对于变量的宣告，是对剖析器的指示(directive)，而不是在执行期的命令(command)，
+    // 不要忘了js是个直译式的脚本语言，所有的真实执行，是由js引擎中的剖析器(或分析器)，
+    // 先对代码作整理剖析完了，才会执行。有个最明显的特性是变量的类型是动态的，
+    // 要看赋给变量什么值，才会决定这个变量的类型，你给变量一个数字，变量就变为数字类型，
+    // 给它个字串，它就是个字串类型。
+    // js在执行时会对相同变量宣告作归纳的处理，以最近的变量指定作为变量在执行时的值。
+    // 以第一例来说，第二行的var a只是个宣告，而不是赋值，除非在执行前的语句，
+    // 都没有对a变量赋值的其他语句，a才会被js引擎当作undefined值，
+    // 也就是"不知道是什么东西，没定义"。第二例则是直接赋给b变量个undefined，
+    // js引擎当然是就认为b是个undefined类型
+    //第一例
+    // var a = 10;
+    // var a;
+    // console.log(a); //10
+
+    // //第二例
+    // var b = 10;
+    // var b = undefined;
+    // console.log(b); //undefined
+</script>
+</html>

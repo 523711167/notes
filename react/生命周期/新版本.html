@@ -40,6 +40,9 @@
             return null;
         }
 
+
+        // 这个方法会接收两个参数 render前 nextProps nextState
+        // 这个方法是可以控制父组件更新但是子组件没有任何变化时，控制子组件不需要重新render
         shouldComponentUpdate() {
             console.log("A-----shouldComponentUpdate")
             return true

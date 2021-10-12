@@ -1,0 +1,47 @@
+/* 我会被编译为css的 */
+.box1 {
+  height: 100px;
+  width: 100px;
+  margin: 20px;
+}
+.box {
+  height: 200px;
+  width: 200px;
+}
+div ul li {
+  list-style: none;
+  text-decoration: none;
+}
+div ul:hover {
+  background-color: #eee;
+}
+.div5 {
+  height: 90px;
+  width: 110px;
+}
+.div6 {
+  width: 8px;
+  height: 50%;
+  margin: 5px;
+}
+.box7 {
+  height: 100px;
+  width: 100px;
+  border: 1px solid red;
+  background-color: #eee;
+}
+.div8 {
+  background-color: #eee;
+}
+.line,
+.div9 {
+  text-decoration: none;
+  list-style: none;
+}
+.div10 {
+  background-color: #fff;
+}
+.div100 {
+  height: 100px;
+  width: 100px;
+}
