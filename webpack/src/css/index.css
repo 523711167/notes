@@ -1,5 +1,8 @@
 body {
     background-image: url("../images/index.png");
+    /* display: flex; */
+    /* background-color: #DDD; */
     display: flex;
+    backface-visibility: hidden;
 }
 

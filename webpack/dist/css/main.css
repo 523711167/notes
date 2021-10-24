@@ -1,9 +1,1 @@
-/*!***************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/dist/cjs.js!./src/css/index.css ***!
-  \***************************************************************************************************************/
-body {
-    background-image: url(../images/992ee9288ce98d190a0564b5c9afcff7.png);
-    display: flex;
-}
-
-
+body{-webkit-backface-visibility:hidden;backface-visibility:hidden;background-image:url(../images/[1]-index.png);display:flex}@font-face{font-family:iconfont;src:url(../a20c350305d4742fc6d1.ttf?t=1634734622227) format("truetype")}.iconfont{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:iconfont!important;font-size:16px;font-style:normal}.icon-shatan_fangshaishuang:before{content:"\e6c2"}
