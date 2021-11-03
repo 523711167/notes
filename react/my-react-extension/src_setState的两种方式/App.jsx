@@ -15,8 +15,8 @@ export default class App extends React.Component {
         console.log("正常输出", this.state.count)
     }
  */
-/* 
-    函数式state更新写法, 第二个参数为DOM更新之后的回调方法
+
+    // 函数式state更新写法, 第二个参数为DOM更新之后的回调方法
     sum = () => {
         //更新之前的state和props
         this.setState((state, props) => {
@@ -24,7 +24,7 @@ export default class App extends React.Component {
             return {count: count+1}
         }, () => {})
     }
-     */
+    
     render() {
         return (
             <div>

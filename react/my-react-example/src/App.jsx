@@ -1,11 +1,11 @@
 import React from "react";
-import './App.sass'
+import Login from "./views/Login"; 
 
 export default class App extends React.Component {
     render() {
         return (
             <div>
-                App...
+                <Login />
             </div>
         )
     }

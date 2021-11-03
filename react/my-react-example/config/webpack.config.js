@@ -28,6 +28,7 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const postcssNormalize = require('postcss-normalize');
+const { library } = require('webpack');
 
 const appPackageJson = require(paths.appPackageJson);
 
@@ -162,11 +163,7 @@ module.exports = function (webpackEnv) {
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
-    devtool: isEnvProduction
-      ? shouldUseSourceMap
-        ? 'source-map'
-        : false
-      : isEnvDevelopment && 'cheap-module-source-map',
+    devtool: 'source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry:
@@ -407,7 +404,6 @@ module.exports = function (webpackEnv) {
                     },
                   ],
                 ],
-                
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
@@ -419,6 +415,15 @@ module.exports = function (webpackEnv) {
                         },
                       },
                     },
+                  ],
+                  [
+                    "import",
+                    {
+                      "libraryName": "antd",
+                      "style": "css"
+                       // 引入样式为 css
+                       // style为true 则默认引入less
+                    }
                   ],
                   isEnvDevelopment &&
                     shouldUseReactRefresh &&
@@ -502,14 +507,20 @@ module.exports = function (webpackEnv) {
             {
               test: sassRegex,
               exclude: sassModuleRegex,
-              use: [{
-                loader: "style-loader"
-              }, {
-                loader: "css-loader"
-              }, {
-                loader: "sass-loader"
-
-              }],
+              use: getStyleLoaders(
+                {
+                  importLoaders: 3,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'sass-loader'
+              ).concat({
+                loader: 'sass-resources-loader',
+                options: {
+                  resources: [
+                    path.resolve(__dirname, './../src/style/main.scss')
+                  ]
+                }
+              }),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
               // Remove this when webpack adds a warning or an error for this.
@@ -535,6 +546,14 @@ module.exports = function (webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
+            {
+              test: /\.scss$/,
+              loader: [
+                'style-loader',
+                'css-loader',
+                'sass-loader'
+              ]
+            }
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
           ],

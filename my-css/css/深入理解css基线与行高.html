@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    html,
+    body,
+    div,
+    span,
+    applet,
+    object,
+    iframe,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    blockquote,
+    pre,
+    a,
+    abbr,
+    acronym,
+    address,
+    big,
+    cite,
+    code,
+    del,
+    dfn,
+    em,
+    img,
+    ins,
+    kbd,
+    q,
+    s,
+    samp,
+    small,
+    strike,
+    strong,
+    sub,
+    sup,
+    tt,
+    var,
+    b,
+    u,
+    i,
+    center,
+    dl,
+    dt,
+    dd,
+    ol,
+    ul,
+    li,
+    fieldset,
+    form,
+    label,
+    legend,
+    table,
+    caption,
+    tbody,
+    tfoot,
+    thead,
+    tr,
+    th,
+    td,
+    article,
+    aside,
+    canvas,
+    details,
+    embed,
+    figure,
+    figcaption,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    output,
+    ruby,
+    section,
+    summary,
+    time,
+    mark,
+    audio,
+    video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+
+    /* HTML5 display-role reset for older browsers */
+    article,
+    aside,
+    details,
+    figcaption,
+    figure,
+    footer,
+    header,
+    hgroup,
+    menu,
+    nav,
+    section {
+        display: block;
+    }
+
+    body {
+        line-height: 1;
+    }
+
+    ol,
+    ul {
+        list-style: none;
+    }
+
+    blockquote,
+    q {
+        quotes: none;
+    }
+
+    blockquote:before,
+    blockquote:after,
+    q:before,
+    q:after {
+        content: '';
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+</style>
+
+<body>
+    <!-- 基线（base line）并不是汉字文字的下端沿，而是英文字母“x”的下端沿。 -->
+    <!-- 内容区是指底线和顶线包裹的区域 -->
+    <!-- 行高（line-height）内容区与以内容区为基础对称拓展的空白区域,
+        空白区域是line-height减font-size的区域,同时如果两行文本的行高
+        和字体大小是一样的，那么通过计算可以得出行高也等于相邻文本的基线距离 -->
+    <!-- 行距：指相邻文本间上一个文本行底线和下一个文本行顶线之间的距离。 -->
+    <!-- 行间距：指行高-字体大小除以2 -->
+    <!-- 行内框: 它的高度就是行高指定的高度。-->
+    <!-- 行框（line box: 行框高度等于本行内所有元素中行内框最大的值（
+        以行高值最大的行内框为基准，其他行内框采用自己的对齐方式向基准对齐，
+        最终计算行框的高度） -->
+
+
+    <!-- vertical-align:
+                顶端对齐（vertical-align : top）是将元素的行内框的顶端与行框的顶端对齐 
+                疑问 todo 行高30px元素距离行框顶端差了一丢丢 
+                文本顶端对齐（vertical-align : text-top）是将元素行内框的顶端同文本行的顶线对齐 
+            -->
+    <div style="border: 1px solid red;line-height: 100px;">
+        <!-- 疑问 todo span我设置了行高为100px，字体大小为100px，行框为100px，但是span居然比100大
+            但是不影响结下来的元素排列 -->
+            我x
+        <span style="line-height: 20px;font-size: 20px;vertical-align:  baseline">我x</span>
+        <span style="line-height: 30px;font-size: 30px;vertical-align:  top">我2x</span>
+        <span style="line-height: 40px;font-size: 40px;vertical-align:  text-top;">我3x</span>
+        <span style="line-height: 50px;font-size: 50px;vertical-align:  bottom;">我4x</span>
+        <span style="line-height: 60px;font-size: 60px;vertical-align:  text-bottom;">我5x</span>
+        <span style="line-height: 70px;font-size: 70px;vertical-align:  middle;">我6x</span>
+    </div>
+    <div style="background-color: red;height: 100px;width: 100px;"></div>
+    <div style="border: 1px solid red;height: 100px;">
+        <span style="line-height: 20px;font-size: 20px;vertical-align:  baseline">我x</span>
+        <span style="line-height: 30px;font-size: 30px;vertical-align:  top">我2x</span>
+        <span style="line-height: 40px;font-size: 40px;vertical-align:  text-top;">我3x</span>
+        <span style="line-height: 50px;font-size: 50px;vertical-align:  bottom;">我4x</span>
+        <span style="line-height: 60px;font-size: 60px;vertical-align:  text-bottom;">我5x</span>
+        <span style="line-height: 70px;font-size: 70px;vertical-align:  middle;">我6x</span>
+    </div>
+    <div style="background-color: red;height: 100px;width: 100px;"></div>
+    <div style="border: 1px solid red;">
+        <span style="line-height: 20px;font-size: 20px;vertical-align:  baseline">我x</span>
+        <span style="line-height: 30px;font-size: 30px;vertical-align:  top">我2x</span>
+        <span style="line-height: 40px;font-size: 40px;vertical-align:  text-top;">我3x</span>
+        <span style="line-height: 50px;font-size: 50px;vertical-align:  bottom;">我4x</span>
+        <span style="line-height: 60px;font-size: 60px;vertical-align:  text-bottom;">我5x</span>
+        <span style="line-height: 70px;font-size: 70px;vertical-align:  middle;">我6x</span>
+    </div>
+    <div style="background-color: red;height: 100px;width: 100px;"></div>
+    <div style="border: 1px solid red;">
+        <span style="line-height: 20px;font-size: 20px;">我x</span>
+        <span style="line-height: 30px;font-size: 30px;">我2x</span>
+        <span style="line-height: 40px;font-size: 40px;">我3x</span>
+        <span style="line-height: 50px;font-size: 50px;">我4x</span>
+        <span style="line-height: 60px;font-size: 60px;">我5x</span>
+        <span style="line-height: 70px;font-size: 70px;">我6x</span>
+    </div>
+</body>
+<!-- https://blog.csdn.net/weixin_39606638/article/details/117863563 -->
+<!-- https://blog.csdn.net/IT_Queen/article/details/54729949 -->
+</html>

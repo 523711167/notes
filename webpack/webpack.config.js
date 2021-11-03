@@ -31,11 +31,11 @@ module.exports = {
                 use: {
                   loader: 'babel-loader',
                   options: {
-                    //   @babel/preset-env包含一堆插件集合
+                    //@babel/preset-env包含一堆插件集合
                     presets: [
                         '@babel/preset-env',
                     ],
-                    plugins: ['@babel/plugin-transform-runtime']
+                    // plugins: ['@babel/plugin-transform-runtime']
                   }
                 }
             },
@@ -70,9 +70,19 @@ module.exports = {
                 test: /\.less$/,
                 use: [
                     'style-loader',
-                    'css-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            // sourceMap: true
+                        }
+                    },
                     // 编译成css文件
-                    'less-loader'
+                    {
+                        loader: 'less-loader',
+                        options: {
+                            // sourceMap: true
+                        }
+                    }
                 ]
             },
             {
@@ -136,4 +146,12 @@ module.exports = {
         compress: true,
         port: 3000
     },
+    // source-map               外部 单个 提示错误原因,可以直接指向源代码位置，可以看源代码
+// inline-source-map            内敛 单个 提示错误原因,可以直接指向源代码位置，可以看源代码
+    // hidden-source-map        外部 单个 提示错误原因,指向编译后代码位置， 可以看编译后代码
+    // eval-source-map          内部 每个js文件 提示错误原因,可以直接指向源代码位置，可以看源代码
+    // nosources-source-map     外部 未知   提示错误原因,可以直接指向源代码位置,看不到源代码
+    // cheap-source-map         外部 未知 提示错误原因,可以直接指向源代码位置，可以看源代码
+    // cheap-moudle-source-map  外部 未知 提示错误原因,可以直接指向源代码位置，可以看源代码
+    devtool: 'source-map'
 }
