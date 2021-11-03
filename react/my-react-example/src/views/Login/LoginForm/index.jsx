@@ -6,8 +6,10 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Row, Col } from 'antd';
 
 // api
-import { Login, GetCode } from '../../../api/account';
+import { Login } from '../../../api/account';
 import { email_validator } from "../../../utils/validator";
+
+import Code from "../../../component/Code";
 
 export default class LoginForm extends React.Component {
 
@@ -15,55 +17,26 @@ export default class LoginForm extends React.Component {
     input_username_ref = React.createRef()
 
     state = {
-        control_button_dissable: true,
-        control_button_text: "获取验证码",
-        control_button_loading: false,
+        username: '',
     }
-
 
     //登陆
     onFinish = (form) => {
         Login().then((resolve, reject) => {
             console.log(resolve)
         })
-        console.log('form表单提交',form)
     }
 
-    //获取验证码
-    getCode = async () => {
-        let email = this.input_username_ref.current.props.value
-        try {
-            let {status, data:{message}} = await GetCode({username: email, module: 'register'})
-            console.log(message)
-            this.setState({control_button_loading: true, control_button_text: "发送中"})
-            if (status === 200) {
-                let num = 3
-                let timer = setInterval(() => {
-                    num--;
-                    if (num <= 0) {
-                        this.setState({
-                            control_button_loading: false,
-                            control_button_text: '重新获取'
-                        }, () => {
-                            clearInterval(timer)
-                        })
-                        return;
-                    }
-                    this.setState({ control_button_text: `${num}S` });
-
-                }, 1000);
-            }
-        } catch (error) {
-            this.setState({
-                control_button_loading: false,
-                control_button_text: '重新获取'
-            })
-        }
+    monitor_username = (event) => {
+        let username = event.target.value
+        this.setState({
+            username
+        })
     }
 
     render() {
         let {toggleForm} = this.props
-        let {control_button_dissable, control_button_text, control_button_loading} = this.state
+        let { username } = this.state
         const _this = this;
         return (
             <Fragment>
@@ -82,9 +55,11 @@ export default class LoginForm extends React.Component {
                             rules={[
                                         { required: true, message: '邮箱不可以为空' },
                                         (FormInstance) => ({
-                                            validator(_, value) {
-                                                if (email_validator(value)) {
-                                                    _this.setState({control_button_dissable: false})
+                                            validator(_, username) {
+                                                if (email_validator(username)) {
+                                                    _this.setState({
+                                                        username
+                                                    })
                                                     return Promise.resolve();
                                                 } else {
                                                     return Promise.reject(new Error('请输入正确的邮箱'));
@@ -105,9 +80,7 @@ export default class LoginForm extends React.Component {
                                     <Input  prefix={<LockOutlined />} placeholder="验证码" />
                                 </Col>
                                 <Col span={9}> 
-                                    <Button loading={control_button_loading} onClick={this.getCode} disabled={control_button_dissable} block type="danger" >
-                                        {control_button_text}
-                                    </Button>
+                                    <Code username={username}/>
                                 </Col>
                             </Row>
                         </Form.Item>

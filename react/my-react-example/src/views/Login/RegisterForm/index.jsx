@@ -5,9 +5,26 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Row, Col } from 'antd';
 
+import Code from "../../../component/Code";
+
+
 export default class RegsiterForm extends React.Component {
+
+    state = {
+        username: '',
+    }
+
+
+    monitor_username = (event) => {
+        let username = event.target.value
+        this.setState({
+            username
+        })
+    }
+
     render() {
         let {toggleForm} = this.props
+        let { username } = this.state
         return (
             <Fragment>
                 <div className="form-header">
@@ -22,7 +39,7 @@ export default class RegsiterForm extends React.Component {
                         <Form.Item
                             name="username"
                             rules={[{ required: true, message: 'Please input your Username!' }]}>
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                            <Input  ref={this.input_username_ref} onChange={this.monitor_username} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
                         </Form.Item>
                         <Form.Item
                             name="password"
@@ -40,9 +57,7 @@ export default class RegsiterForm extends React.Component {
                                     <Input prefix={<LockOutlined />} placeholder="验证码" />
                                 </Col>
                                 <Col span={9}>
-                                    <Button block type="danger" >
-                                        获取验证码
-                                    </Button>
+                                    <Code username={username}/>
                                 </Col>
                             </Row>
                         </Form.Item>

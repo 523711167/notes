@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>react使用</title>
+</head>
+<script src="node_modules/react/umd/react.development.js"></script>
+<script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="babel.min.js"></script>
+<body>
+<div id="app">
+
+</div>
+</body>
+<script type="text/babel">
+    //此处是有BUG版本 
+    class A extends React.Component {
+        state = {
+            value: 1
+        }
+        static getDerivedStateFromProps (props, state) {
+            console.log(props);
+            console.log(state);
+            if (props.value !== state.value) {
+                return {
+                    value: props.value
+                }
+            }
+            return null
+        }
+
+        add = () => {
+            let num = this.state.value
+            num = num + 1
+            this.setState({
+                value: num
+            })
+        }
+
+        render () {
+            return (
+                <div>
+                    {this.state.value}
+                    <button onClick={this.add}>点我加1</button> 
+                 </div>
+            )
+
+        }
+    }
+
+    class B extends React.Component {
+        state = {
+            value: 1,
+            caches: 0
+        }
+        static getDerivedStateFromProps (props, state) {
+            console.log(props);
+            console.log(state);
+            if (props.value !== state.caches) {
+                return {
+                    value: props.value,
+                    caches: props.value
+                }
+            }
+            return null
+        }
+
+        add = () => {
+            let num = this.state.value
+            num = num + 1
+            this.setState({
+                value: num
+            })
+        }
+
+        render () {
+            return (
+                <div>
+                    {this.state.value}
+                    <button onClick={this.add}>点我加1</button> 
+                 </div>
+            )
+
+        }
+    }
+
+    ReactDOM.render(<B value={2}/>, document.getElementById("app"))
+</script>
+</html>
