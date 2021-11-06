@@ -2,6 +2,8 @@ import React from "react";
 
 // antd
 import { Button } from 'antd';
+import { message } from 'antd';
+
 
 // api
 import { GetCode } from "../../api/account";
@@ -42,16 +44,16 @@ export default class Code extends React.Component {
     getCode = async () => {
         let { username } = this.state
         try {
-            let {status, data:{message}} = await GetCode({username, module: 'register'})
+            let {status, data:{message: msg}} = await GetCode({username, module: 'register'})
             this.setState({
                 control_button_dissable: true,
                 control_button_loading: true,
                 control_button_text: "发送中"
             })
+            message.success(msg);
             if (status === 200) {
-                let num = 30
+                let num = 5
                 timer = setInterval(() => {
-                    console.log(num)
                     num--;
                     if (num <= 0) {
                         this.setState({
@@ -63,10 +65,10 @@ export default class Code extends React.Component {
                         return;
                     }
                     this.setState({ control_button_text: `${num}S` });
-
                 }, 1000);
             }
         } catch (error) {
+            message.warning('获取验证码失败,请重新获取');
             this.setState({
                 control_button_loading: false,
                 control_button_text: '重新获取'
@@ -77,7 +79,6 @@ export default class Code extends React.Component {
     render() {
         let { control_button_dissable, control_button_text, control_button_loading } = this.state
         let { username } = this.props
-        console.log('username' ,username);
         return (
             <Button 
                 loading={control_button_loading} 

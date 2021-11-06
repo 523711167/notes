@@ -1,10 +1,8 @@
 import React, { Fragment } from "react";
 
 //antd
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message, Row, Col } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { Row, Col } from 'antd';
-
 // api
 import { Login } from '../../../api/account';
 import { email_validator } from "../../../utils/validator";
@@ -15,16 +13,29 @@ export default class LoginForm extends React.Component {
 
     // 用户输入框
     input_username_ref = React.createRef()
+    input_password_ref = React.createRef()
+    input_code_ref = React.createRef()
 
     state = {
         username: '',
     }
 
     //登陆
-    onFinish = (form) => {
-        Login().then((resolve, reject) => {
-            console.log(resolve)
-        })
+    onFinish = async (form) => {
+        let username = this.input_username_ref.current.state.value
+        let password = this.input_password_ref.current.state.value
+        let code = this.input_code_ref.current.state.value
+        try {
+            let { data } = await Login({username, password, code})
+            console.log(data)
+            if (data.resCode === 0) {
+                message.success(data.message)
+            } else {
+                message.warn(data.message)
+            }
+        } catch (error) {
+            message.error(error)
+        }
     }
 
     monitor_username = (event) => {
@@ -35,7 +46,7 @@ export default class LoginForm extends React.Component {
     }
 
     render() {
-        let {toggleForm} = this.props
+        let { toggleForm } = this.props
         let { username } = this.state
         const _this = this;
         return (
@@ -67,17 +78,28 @@ export default class LoginForm extends React.Component {
                                             },
                                         }),
                                     ]} >
-                            <Input  ref={this.input_username_ref} onChange={this.monitor_username} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                            <Input  
+                                ref={this.input_username_ref} 
+                                onChange={this.monitor_username} 
+                                prefix={<UserOutlined className="site-form-item-icon" />} 
+                                placeholder="Username" />
                         </Form.Item>
                         <Form.Item
                             name="password"
-                            rules={[{ required: true, message: 'Please input your Password!' }]}>
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Password" />
+                            rules={[
+                                { required: true, message: 'Please input your Password!' }
+                                ]}>
+                            <Input  prefix={<UserOutlined className="site-form-item-icon" />} 
+                                    placeholder="Password" 
+                                    ref={this.input_password_ref}/>
                         </Form.Item>
                         <Form.Item name="code" rules={[{ required: true, message: 'Please input your Password!' }]}>
                             <Row gutter={13}>
                                 <Col span={15}>
-                                    <Input  prefix={<LockOutlined />} placeholder="验证码" />
+                                    <Input
+                                        ref={this.input_code_ref}  
+                                        prefix={<LockOutlined />} 
+                                        placeholder="验证码" />
                                 </Col>
                                 <Col span={9}> 
                                     <Code username={username}/>
