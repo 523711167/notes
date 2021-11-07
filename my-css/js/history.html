@@ -18,8 +18,11 @@
     <button onclick="goback()">退回</button>
 </body>
 <script>
-		// let history = History.createBrowserHistory() //方法一，直接使用H5推出的history身上的API
-		let history = History.createHashHistory() //方法二，hash值（锚点）
+        //方法一，直接使用H5推出的history身上的API， <a href="pdd"></a>  但是干掉了默认的跳转的事件
+		// let history = History.createBrowserHistory() 
+
+		let history = History.createHashHistory() 
+        //方法二，hash值（锚点） 锚点跳转不跳转页面，但是会有history的记录
         // 类似这种<a href="#pdd"></a> 
 
     function push(path) {

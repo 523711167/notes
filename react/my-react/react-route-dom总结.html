@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Link组件</h2>
+    <h2>NavLink组件</h2>
+    <h2>Route组件</h2>
+    <ul>
+        <li>路由组件props属性，里面有history、location、match三个属性</li>
+        <ul>
+            <li>history属性  
+                 go(n)  go中传入栈索引，跳转对应
+                 goBack()  返回上一级
+                 goForward() 向前一级
+                 push push(path, state) push模式，可以使用3种路由传递值
+                 replace replace(path, state) replace模式，可以使用3种路由传递值</li>
+            <li>location属性 pathname search state</li>
+            <li>match属性    params path url</li>
+        </ul> 
+        <li>路由组件是根据导航来渲染</li>
+        <ul>
+            <li>模糊匹配：导航/home/a/b，可以匹配路由/home，但是导航/home，不可以匹配路由/home/a/b</li>
+            <li>严格匹配：/home/a/b 匹配//home/a/b</li>
+            <li>多级路由的导航：导航/home/news， 路由通过匹配/home，渲染Home组件，Home组件注册路由，继续匹配Home组件注册的路由
+                如果严格匹配，匹配/home失败，不会渲染Home，发现无匹配内容，Redirect组件匹配。总结react-route-dom在导航匹配路由，
+                （理解不知道怎么描述）。
+                在使用Switch组件，Route组件只会匹配一次，应该是在当前Switch组件中匹配一次，如果匹配Route组件中，发现有存在Route组件，
+                继续匹配二级Route组件路由，如果匹配成功，继续循环操作，如果无匹配内容，寻找Redirect组件，然后结束匹配，
+                上一级的Switch组件中的Route组件匹配已经结束。(每一次匹配都是按照这个规则 理解)
+
+            </li>
+        </ul>
+        <li>向路由组件传递参数</li>
+        <ul>
+            <li>params参数
+                 导航组件传递1的参数<Link to='/home/news/person/1'>导航</Link>
+                 路由组件接受1的参数<Route path='/home/news/person/:id'></Route>
+                 参数在props.match.params属性中
+            </li>
+            <li>search参数
+                导航组件传递1的参数<Link to={`/home/news/person/?id=1`}>导航</Link>
+                路由组件接受1的参数<Route path='/home/news/person></Route>
+                参数在props.location.search属性中
+            </li>
+            <li>
+                导航组件传递1的参数<Link to={{pathname: '/home/news/person/', state: {id: 1}}}>导航</Link>
+                路由组件接受1的参数<Route path='/home/news/person></Route>
+                参数在props.location.state属性中
+            </li>
+            <li>withRoute</li>
+            <ul>
+                <li>在非路由组件中，想使用编程式路由导航，就需要withRoute，自动传入history对象</li>
+            </ul>
+        </ul>
+    </ul>
+    <h2>Switch组件</h2>
+    <h6>Route组件匹配一次就结束匹配</h6>
+    <h2>Redirct组件</h2>
+    <h6>Route组件所有匹配失败，Redirct组件指定路由组件</62>
+</body>
+</html>

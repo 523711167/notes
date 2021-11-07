@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 //antd
 import { Form, Input, Button, message, Row, Col } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-// api
+//api
 import { Login } from '../../../api/account';
 import { email_validator } from "../../../utils/validator";
 
