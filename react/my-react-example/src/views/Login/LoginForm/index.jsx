@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { withRouter } from "react-router-dom"; 
 
 //antd
 import { Form, Input, Button, message, Row, Col } from 'antd';
@@ -6,10 +7,11 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 //api
 import { Login } from '../../../api/account';
 import { email_validator } from "../../../utils/validator";
+import { setToken } from "../../../utils/session";
 
 import Code from "../../../component/Code";
 
-export default class LoginForm extends React.Component {
+class LoginForm extends React.Component {
 
     // 用户输入框
     input_username_ref = React.createRef()
@@ -22,20 +24,26 @@ export default class LoginForm extends React.Component {
 
     //登陆
     onFinish = async (form) => {
+        let { history } = this.props
         let username = this.input_username_ref.current.state.value
         let password = this.input_password_ref.current.state.value
         let code = this.input_code_ref.current.state.value
         try {
-            let { data } = await Login({username, password, code})
-            console.log(data)
+            let { data, data: { data: { token, message: msg } } } = await Login({username, password, code})
             if (data.resCode === 0) {
-                message.success(data.message)
+                message.success(msg)
+                setToken(token)
+                history.push('/index')
             } else {
-                message.warn(data.message)
+                message.warn(msg)
             }
         } catch (error) {
             message.error(error)
         }
+    }
+
+    componentWillUnmount() {
+        message.destroy()
     }
 
     monitor_username = (event) => {
@@ -117,3 +125,5 @@ export default class LoginForm extends React.Component {
         )
     }
 }
+
+export default withRouter(LoginForm)

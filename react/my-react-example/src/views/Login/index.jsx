@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router-dom"; 
 
 import './index.scss'
 
@@ -7,7 +8,7 @@ import RegisterForm from "./RegisterForm";
 
 
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
     state = {
         toggle: 'Login'
@@ -30,3 +31,4 @@ export default class Login extends React.Component {
         )
     }
 }
+export default withRouter(Login)

@@ -1,0 +1,20 @@
+.layout-warp {
+    height: 100vh;
+}
+::v-deep(.sider-warp) {
+    width: 200px;
+}
+
+.layout-header {
+    position: relative;
+    height: 75px;
+    box-shadow: 0 3px 16px 0 rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+.layout-main {
+    border: 30px solid #f7f7f7;
+    padding: 30px;
+}
+
+
+

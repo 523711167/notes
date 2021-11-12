@@ -1,18 +1,20 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom"
+import React, { Fragment } from "react";
+import { Route, Switch, Redirect } from "react-router-dom"
 
 import Login from "./views/Login"; 
 import Index from "./views/Index"
+import PrivateRouter from "./component/PrivateRouter";
 
 export default class App extends React.Component {
     render() {
         return (
-            <div>
-                <Routes>
-                    <Route path='/' component={Login}/>
-                    <Route path='/index' component={Index}/>
-                </Routes>
-            </div>
+            <Fragment>
+                <Switch>
+                    <Route path='/login' component={Login}/>
+                    <PrivateRouter path='/index' component={Index}/>
+                    <Redirect to='/login'/>
+                </Switch>
+            </Fragment>
         )
     }
 }
