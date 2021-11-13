@@ -21,7 +21,7 @@ export default class Collapse extends React.Component {
     }
 
     render() {
-        let { collapsed, arrow } = this.state
+        let { arrow } = this.state
         return (
             <Fragment>
                 <span onClick={this.collapse} style={{fontSize: '35px', lineHeight: '75px', cursor: 'pointer'}}>

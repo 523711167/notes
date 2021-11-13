@@ -5,16 +5,20 @@ import { Switch } from "react-router-dom";
 import PrivateRouter from '../PrivateRouter/index'
 
 // View组件
-import User from "../../views/User";
-import Dept from "../../views/Dept";
+import paths from './component.js'
+
 
 export default class Container extends React.Component {
     render() {
         return (
             <Fragment>
                 <Switch>
-                    <PrivateRouter path='/index/user/list' component={User}/>
-                    <PrivateRouter path='/index/user/add' component={Dept}/>
+                    {
+                        paths.map((item) => <PrivateRouter 
+                                key={item.path.toLocaleLowerCase()} 
+                                path={item.path.toLocaleLowerCase()} 
+                                component={item.component}/>)
+                    }
                 </Switch>
             </Fragment>
         )

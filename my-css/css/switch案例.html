@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  * {
+      margin: 0px;
+      padding:0px;
+  }
+  body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+  label {
+      overflow: hidden;
+      position: relative;
+      width: 150px;
+      height: 76px;
+      border-radius: 38px;
+      background-color: #e9e9e9;
+  }
+label input::before {
+    visibility: visible;
+    content: '';
+    position: absolute;
+    width: 66px;
+    height: 66px;
+    border-radius: 50%;
+    left: 5px;
+    top: 5px;
+    transition: all 0.5s;
+    z-index: 99;
+    background-color: #fff;
+}
+
+label input:checked::before {
+    transform: translateX(74px);
+}
+
+label input {
+    visibility: hidden;
+}
+
+label input::after {
+    visibility: visible;
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    transition: all 0.5s;
+}
+
+label input:checked::after {
+    background-color: green;
+}
+
+</style>
+<body>
+    <label for="switch">
+        <input type="checkbox" name="switch" id="switch" />
+    </label>
+    <!-- https://www.bilibili.com/video/BV1wy4y1671Y?from=search&seid=13247457264753935711&spm_id_from=333.337.0.0 -->
+</body>
+</html>

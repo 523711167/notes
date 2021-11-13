@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+    }
+    .warp {
+        height: 200px;
+        width: 200px;
+        background-color: red;
+        margin: 50px;
+    }
+
+    .noposition {
+        height: 50px;
+        width: 50px;
+        background-color: green;
+    }
+
+    .yesposition {
+        height: 80px;
+        width: 80px;
+        background-color: pink;
+        position: absolute;
+        left: 10px;
+    }
+</style>
+<body>
+    <!-- 绝对定位特性1 
+            不给left和right的情况下，元素默认就是在文档流中的最初位置，其实是默认补充了left和rihgt
+            给left和right的情况下，元素会已最近的一个已经定位的元素给起点移动
+         绝对定位特性2
+            绝对定位也会造成高度坍塌，真实的脱离了文档流，文字也会被覆盖
+            浮动属性也会造成高度坍塌，但是文字会环绕浮动元素
+            据说是绝对定位是真实的脱离了文档流，而浮动只是欺骗了父级元素
+            https://www.jianshu.com/p/a3da5e27d22b
+    -->
+    <div class="warp">
+        <div class="noposition">
+
+        </div>
+        <div class="yesposition">
+
+        </div>
+    </div>
+</body>
+</html>

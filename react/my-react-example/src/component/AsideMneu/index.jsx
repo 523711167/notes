@@ -50,11 +50,10 @@ export default class AsideMenu extends React.Component {
     }
 
     render() {
-        let { defaultSelectedKeys, openKeys, selectedKeys } = this.state
+        let { openKeys, selectedKeys } = this.state
         return (
             <Fragment>
                 <Menu 
-                    inlineCollapsed={true}
                     onOpenChange={this.onOpenChange}
                     onClick={this.selectedMenu}
                     selectedKeys={selectedKeys}
