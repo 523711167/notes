@@ -7,7 +7,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 //api
 import { Login } from '../../../api/account';
 import { email_validator } from "../../../utils/validator";
-import { setToken } from "../../../utils/session";
+import { setToken, setUsername } from "../../../utils/cookies";
 
 import Code from "../../../component/Code";
 
@@ -29,14 +29,11 @@ class LoginForm extends React.Component {
         let password = this.input_password_ref.current.state.value
         let code = this.input_code_ref.current.state.value
         try {
-            let { data, data: { data: { token, message: msg } } } = await Login({username, password, code})
-            if (data.resCode === 0) {
-                message.success(msg)
-                setToken(token)
-                history.push('/index')
-            } else {
-                message.warn(msg)
-            }
+            let { data: { data: { token, message: msg } } } = await Login({username, password, code})
+            message.success(msg)
+            setToken(token)
+            setUsername(username)
+            history.push('/index')
         } catch (error) {
             message.error(error)
         }

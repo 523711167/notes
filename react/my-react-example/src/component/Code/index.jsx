@@ -44,29 +44,27 @@ export default class Code extends React.Component {
     getCode = async () => {
         let { username } = this.state
         try {
-            let {status, data:{message: msg}} = await GetCode({username, module: 'register'})
+            let { data:{ message: msg } } = await GetCode({username, module: 'register'})
             this.setState({
                 control_button_dissable: true,
                 control_button_loading: true,
                 control_button_text: "发送中"
             })
             message.success(msg);
-            if (status === 200) {
-                let num = 5
-                timer = setInterval(() => {
-                    num--;
-                    if (num <= 0) {
-                        this.setState({
-                            control_button_loading: false,
-                            control_button_text: '重新获取'
-                        }, () => {
-                            timer = clearInterval(timer)
-                        })
-                        return;
-                    }
-                    this.setState({ control_button_text: `${num}S` });
-                }, 1000);
-            }
+            let num = 5
+            timer = setInterval(() => {
+                num--;
+                if (num <= 0) {
+                    this.setState({
+                        control_button_loading: false,
+                        control_button_text: '重新获取'
+                    }, () => {
+                        timer = clearInterval(timer)
+                    })
+                    return;
+                }
+                this.setState({ control_button_text: `${num}S` });
+            }, 1000);
         } catch (error) {
             message.warning('获取验证码失败,请重新获取');
             this.setState({

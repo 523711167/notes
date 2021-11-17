@@ -36,19 +36,16 @@ export default class RegsiterForm extends React.Component {
         let username = this.register_email.current.state.value
         let password = this.register_password.current.state.value
         let code = this.register_code.current.state.value
-        let { data } = await Register({
-                                username,
-                                password,
-                                code})
-        if (data.resCode === 0) {
+        try {
+            await Register({ username, password, code})
             message.success('注册成功，自动切换到登陆页')
             this.setState({
                 loading: true,
                 disabled: true
             })
             toggleForm('Login')()
-        } else { 
-            message.warn(data.message)
+        } catch ({ data: { message: msg}}) {
+            message.warn(msg)
         }
     }
 
