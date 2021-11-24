@@ -22,9 +22,10 @@
             value: 1
         }
         static getDerivedStateFromProps (props, state) {
-            console.log(props);
-            console.log(state);
+            console.log('props', props);
+            console.log('state', state);
             if (props.value !== state.value) {
+                // 
                 return {
                     value: props.value
                 }
@@ -87,6 +88,6 @@
         }
     }
 
-    ReactDOM.render(<B value={2}/>, document.getElementById("app"))
+    ReactDOM.render(<A value={2}/>, document.getElementById("app"))
 </script>
 </html>

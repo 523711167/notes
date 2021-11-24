@@ -10,7 +10,6 @@
 <script src="node_modules/react/umd/react.development.js"></script>
 <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
 <script src="babel.min.js"></script>
-<script src="http://localhost:8097"></script>
 
 <body>
     <div id="app">
@@ -41,21 +40,56 @@
     */
 
     // 第二种简写方式
-    class Weather extends React.Component {
-        //疑问 不理解这种写法转ES5的实现效果
-        // 就是在实例上挂载了一个属性
-        state = { isHot: false }
+    // class Weather extends React.Component {
+    //     //疑问 不理解这种写法转ES5的实现效果
+    //     // 就是在实例上挂载了一个属性
+    //     state = { isHot: false }
 
-        // lambal表达式的this不理解
-        changeWeather = () => {
-            this.setState({ isHot: !this.state.isHot })
+    //     // lambal表达式的this不理解
+    //     changeWeather = () => {
+    //         this.setState({ isHot: !this.state.isHot })
+    //     }
+
+    //     render() {
+    //         return <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '寒冷'}</h1>
+    //     }
+    // }
+
+
+    // 深层次的state对象,会出现奇奇怪怪的问题
+    class A extends React.Component {
+        state = {
+            person: {
+                name: '拼刀刀',
+                age: 28
+            },
+            total: 80
+        }
+
+        onClickChange = () => {
+            let { person } = this.state
+            this.setState({
+                person: {
+                    // 解决深层次替换办法
+                    ...person,
+                    name: '拼夕夕'
+                }
+            })
         }
 
         render() {
-            return <h1 onClick={this.changeWeather}>今天天气很{this.state.isHot ? '炎热' : '寒冷'}</h1>
+            let { person: { name, age }, total } = this.state
+            return (
+                <div>
+                    <h1>{name}</h1>
+                    <h1>{age}</h1>
+                    <h1>{total}</h1>
+                    <button onClick={this.onClickChange}>点我</button>
+                </div>
+            )
         }
     }
-    ReactDOM.render(<Weather />, document.getElementById("app"));
+    ReactDOM.render(<A />, document.getElementById("app"));
 
 </script>
 

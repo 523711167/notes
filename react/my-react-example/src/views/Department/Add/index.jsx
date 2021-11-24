@@ -17,16 +17,19 @@ export default class Add extends React.Component {
 
     onFinish = async (form) => {
         this.setState({ loading: true })
-        console.log(form)
         try {
             let { data: { message: msg } } = await AddDept(form)
             message.success(msg)
             this.formRef.current.resetFields()
             this.setState({ loading: false })
-        } catch ({ data: { message: msg } }) {
-            message.error(msg)
+        } catch (error) {
+            message.error(error)
             this.setState({ loading: false })
         }
+    }
+
+    componentDidMount() {
+        console.log(this.props)
     }
 
     render() {

@@ -21,17 +21,18 @@ service.interceptors.request.use(function (config) {
 
 // 添加响应拦截器
 service.interceptors.response.use(function ( response ) {
-    console.log(response)
     let { data: { resCode } } = response
     if (resCode === 0) {
         return response;
     } else {
-        return Promise.reject(response)
+        console.log(response)
+        return Promise.reject(response.toString())
     }
     // 对响应数据做点什么
 }, function (error) {
     // 对响应错误做点什么
-    return Promise.reject(error);
+    console.log(error)
+    return Promise.reject(error.toString());
 });
 
 export default service;

@@ -35,7 +35,8 @@ class LoginForm extends React.Component {
             setUsername(username)
             history.push('/index')
         } catch (error) {
-            message.error(error)
+            // message.error(error)
+            console.log(error)
         }
     }
 
