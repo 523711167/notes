@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
 import { Link } from 'react-router-dom'
-
+import { connect } from 'react-redux'
 
 import { Button, Switch, Space, message } from 'antd';
 
 import  UIDataTable  from '@c/Table/UI'
 import { ListDept, StatusDept, DeleteDept } from '@a/dept.js'
 
-export default class TableComponent extends React.Component {
+class TableComponent extends React.Component {
 
     state = {
         dataConfig: {
@@ -36,20 +36,16 @@ export default class TableComponent extends React.Component {
                     )}
                 }
             ],
-            dataSource: [],
+
             modal: {
                 isModalVisible: false,
                 id: ''
             },
-            total: 0,
             param: {
                 name: '',
                 pageNumber: 1,
                 pageSize: 10
-            },
-            forms: [
-                { label: '部门名称', name: 'name'}
-            ]
+            }
         }
     }
 
@@ -135,29 +131,10 @@ export default class TableComponent extends React.Component {
         })
     }
 
-
-    onFinish = ({ name }) => {
-        let { dataConfig } = this.state
-        this.setState({
-            dataConfig: {
-                ...dataConfig,
-                param: {
-                    name,
-                    pageNumber: 1,
-                    pageSize: 10
-                }
-            }
-        }, () => {
-            this.loadingdata()
-        })
-    }
-
     loadingdata = async () => {
         let { dataConfig: { param }, dataConfig } = this.state
         try {
-            console.log(param)
             let { data: { data: { data, total } } } = await ListDept(param)
-            console.log(data)
             this.setState({
                 dataConfig: {
                     ...dataConfig,
@@ -179,14 +156,28 @@ export default class TableComponent extends React.Component {
 
     render() {
         let { dataConfig } = this.state
+        let { data, total } = this.props
         return (
             <Fragment>
                 <UIDataTable {...dataConfig}  
+                             dataSource={data}
+                             total={total}
                              handleCancel={this.handleCancel} 
                              handleOk={this.handleOk} 
-                             onChange={this.onChange}
-                             onFinish={this.onFinish}/>
+                             onChange={this.onChange} />
             </Fragment>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    let { search: { data, total }} = state
+    return {
+        data,
+        total
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({})
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableComponent)

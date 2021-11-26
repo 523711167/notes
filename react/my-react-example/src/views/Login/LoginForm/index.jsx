@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import { withRouter } from "react-router-dom"; 
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 //antd
 import { Form, Input, Button, message, Row, Col } from 'antd';
@@ -7,7 +9,9 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 //api
 import { Login } from '../../../api/account';
 import { email_validator } from "../../../utils/validator";
-import { setToken, setUsername } from "../../../utils/cookies";
+import { setToken as setTokenCookie, setUsername as setUsernameCookie } from "../../../utils/cookies";
+import { setTokenAction, setUsernameAction } from '@s/action/App'
+
 
 import Code from "../../../component/Code";
 
@@ -24,13 +28,15 @@ class LoginForm extends React.Component {
 
     //登陆
     onFinish = async (form) => {
-        let { history } = this.props
+        let { history, setToken, setUsername } = this.props
         let username = this.input_username_ref.current.state.value
         let password = this.input_password_ref.current.state.value
         let code = this.input_code_ref.current.state.value
         try {
             let { data: { data: { token, message: msg } } } = await Login({username, password, code})
             message.success(msg)
+            setTokenCookie(token)
+            setUsernameCookie(username)
             setToken(token)
             setUsername(username)
             history.push('/index')
@@ -124,4 +130,37 @@ class LoginForm extends React.Component {
     }
 }
 
-export default withRouter(LoginForm)
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         setToken:  (token) => {
+//             dispatch(setTokenAction(token))
+//         },
+//         setUsername: (username) => {
+//             dispatch(setUsernameAction(username))
+//         }
+//     }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         actions: bindActionCreators({
+//             setToken: setTokenAction,
+//             setUsername: setUsernameAction
+//         }, dispatch)
+
+//     }
+// }
+
+const mapDispatchToProps = {
+        setToken: setTokenAction,
+        setUsername: setUsernameAction
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(LoginForm))

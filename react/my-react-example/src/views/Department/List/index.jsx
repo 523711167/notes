@@ -1,17 +1,14 @@
 import React, { Fragment } from "react";
 
-// antd
-import { Form, Input, Button, message} from 'antd';
-
 import TableComponent from '@c/Table'
-import { ListDept, DeleteDept, StatusDept } from '@/api/dept.js'
-
+import Search from '@c/Search'
 
 export default class List extends React.Component {
 
     render() {
         return (
             <Fragment>
+                <Search />
                 <TableComponent />
             </Fragment>
         )

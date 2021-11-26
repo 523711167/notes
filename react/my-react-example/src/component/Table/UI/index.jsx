@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
+import { nanoid } from 'nanoid'
 
 // antd
-import { Table, Modal, Pagination, Form, Input, Button } from 'antd';
+import { Table, Modal, Pagination } from 'antd';
 const { Column } = Table;
 
 
@@ -13,36 +14,18 @@ export default class UIDataTable extends React.Component {
               handleOk, 
               handleCancel, 
               total, 
-              onChange,
-              forms,
-              onFinish } = this.props
+              onChange } = this.props
         return (
             <Fragment>
-                <Form onFinish={onFinish} layout={'inline'}>
-                    {
-                        forms.map(({ label, name }) => {
-                            return (
-                                <Form.Item label={label} name={name}>
-                                    <Input />
-                                </Form.Item>
-                            )
-                        })
-                    }
-                    <Form.Item >
-                        <Button type="primary" htmlType="submit">
-                            查询
-                        </Button>
-                    </Form.Item>
-                </Form>
                 <Table  pagination={false} 
-                        rowKey='id' 
+                        rowKey={'id'} 
                         dataSource={dataSource} 
                         bordered={true} 
                         scroll={{ y: 'calc(100vh - 300px)' }}>
                     {
                         columns.map(column => {
                             return (
-                            <Column {...column} />
+                            <Column key={nanoid()} {...column} />
                             )
                         })
                     }
