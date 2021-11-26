@@ -85,8 +85,8 @@ function mapStateToProps(state) {
 
 
 // 优化后 connnect可以直接返回对象，dispatch会在执行完成后自动执行
-export default connect(mapStateToProps, {
-    increament: createIncreamentAction,
-    decreament: createDecreamentAction,
-    increamentAsync: createIncreamentAsyncAction
-})(Count)
+    export default connect(mapStateToProps, {
+        increament: createIncreamentAction,
+        decreament: createDecreamentAction,
+        increamentAsync: createIncreamentAsyncAction
+    })(Count)

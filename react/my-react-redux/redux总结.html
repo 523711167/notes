@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h6>reactComponent使用ActionCreators,通过dispatch分发Action给Store,
+        store在使用previousState和action传递给Reducers,reducers加工最新的
+        state状态返回给store,store.subscrib()监听state变化
+    </h6>
+
+    <h6>第一步，创建对应的reducer</h6>
+    <h6>第二部，通过createStore(reducer)创建和reducer关联的store</h6>
+    <h6>（注）reducer初始化的时候，通过自动传递一组prestate(undefined)和action(@@XXXXXX)，此时主要是用来自定义初始化state的值</h6>
+    <h6>第三步，通过store.dispatch(action)，reducer通过action执行state更新</h6>
+    <h6>第四步，在componentDidMount函数中store.subcribe(() => this.setState({})),
+        监听store中state的变化，执行函数，render组件</h6>
+    <h6>第五步，通过store.getState()获取state值</h6>
+    <h5>同步Action和异步Action, 异步Action就是Action为函数一般对象，同步Action是一般Object对象
+        export const createIncreamentAsyncAction = (data) => {
+            return (dispatch) => {
+                setTimeout(() => {
+                    dispatch(createIncreamentAction(data))
+                }, 1000)
+            }
+        }
+        引入函数对象的action需要引入thunk中间件，创建store需要加载中间件thunk
+        export default createStore(countReducer, applyMiddleware(thunk))
+     </h5>
+     <h5>React-redux</h5>
+     <h6>第一步，创建UI的容器组件
+
+        function mapStateToProps(state) {
+            return {count: state}
+        }
+
+        function mapDispatchToProps(dispatch) {
+            return {
+                increament: (number) => dispatch(createIncreamentAction(number)),
+                decreament: (number) => dispatch(createDecreamentAction(number)),
+                increamentAsync: (number) => dispatch(createIncreamentAsyncAction(number))
+            }
+        } 
+
+        export default connect(mapStateToProps, {
+            increament: createIncreamentAction,
+            decreament: createDecreamentAction,
+            increamentAsync: createIncreamentAsyncAction
+        })(Count)
+        1.Count为UI组件，通过connect创建容器组件
+        2.redux到UI组件的通路
+            容器组件可以通过mapStateToProps形参state打通redux到容器组件的通路
+            容器组件可以通过mapStateToProps的返回值，通过props的形式传递给UI组件(store状态)
+        3.UI组件到Redux的通路
+            容器组件可以通过mapDispatchToProps的返回值，通过props的形式传递给UI组件(执行的函数)
+            容器组件可以通过mapDispatchToProps形参dispatch打通容器组件到redux的通路
+     </h6>
+     <h6>第二步，通过props向容器组件传递store</h6>
+     <h6>第三步，不需要store.subscribe()，在connect里面创建已经监听store</h6>
+     <h6>第四步，Provide组件自动给所有容器组件传递store
+            <Provider store={store}>
+                <App/>
+            </Provider>
+     </h6>
+
+     <h5>多个组件之间使用store
+        export default createStore(combineReducers({
+            count: countReducer,
+            person: personReducer
+        }), composeWithDevTools(applyMiddleware(thunk)))
+     </h5>
+
+     <h5>reducer要求需要是纯函数， 任何时候形参只要一样，函数返回的结果必须是一样的</h5>
+     <h6>不允许改写形参的值，比如对形参重新赋值</h6>
+     <h6>不会有任何副作用,比如网络请求,输入和输出设备</h6>
+     <h6>不能调用Date.now()等不纯的函数
+     </h6>
+</body>
+</html>
