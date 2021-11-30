@@ -19,7 +19,6 @@ export default class Index extends React.Component {
     }
 
     cbCollapse = (collapse) => {
-        console.log(collapse)
         this.setState({
             collapsed: !collapse
         })
