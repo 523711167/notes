@@ -36,7 +36,6 @@ class TableComponent extends React.Component {
                     )}
                 }
             ],
-
             modal: {
                 isModalVisible: false,
                 id: ''
@@ -84,7 +83,6 @@ class TableComponent extends React.Component {
     }
 
     handleCancel = (event) => {
-        console.log(111);
         let { dataConfig } = this.state
         this.setState({
             dataConfig: {
@@ -178,6 +176,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({})
+const mapDispatchToProps = (dispatch) => ({
+    init: async ({ name, pageNumber, pageSize }) => {
+        let { data: { data } } = await ListDept({ name, pageNumber, pageSize })
+    }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableComponent)
