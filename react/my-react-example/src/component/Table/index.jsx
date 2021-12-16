@@ -178,7 +178,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     init: async ({ name, pageNumber, pageSize }) => {
-        let { data: { data } } = await ListDept({ name, pageNumber, pageSize })
+        await ListDept({ name, pageNumber, pageSize })
     }
 })
 

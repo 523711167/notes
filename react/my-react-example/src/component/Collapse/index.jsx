@@ -4,29 +4,18 @@ import { LeftCircleOutlined, DownCircleOutlined } from '@ant-design/icons';
 
 export default class Collapse extends React.Component {
 
-    state = {
-        collapsed: false,
-        arrow: 'left'
-    }
-
-    collapse = (event) => {
-        let { cbCollapse } = this.props
-        let { collapsed, arrow } = this.state
-        cbCollapse(!collapsed)
-        this.setState({
-            collapsed: !collapsed,
-            arrow: arrow === 'left'? 'right': 'left'
-        })
-
+    collapse = () => {
+        let { triggerCollapse, collapsed } = this.props
+        triggerCollapse(!collapsed)
     }
 
     render() {
-        let { arrow } = this.state
+        let { collapsed } = this.props
         return (
             <Fragment>
-                <span onClick={this.collapse} style={{fontSize: '35px', lineHeight: '75px', cursor: 'pointer'}}>
+                <span onClick={this.collapse} style={{fontSize: '35px', lineHeight: '60px', cursor: 'pointer'}}>
                     {
-                        arrow === 'left'? <DownCircleOutlined />: <LeftCircleOutlined />
+                        collapsed ? <DownCircleOutlined />: <LeftCircleOutlined />
                     }
                 </span>
             </Fragment>

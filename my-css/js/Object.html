@@ -9,4 +9,20 @@
 <body>
     
 </body>
+<script>
+    // Object.is() 比较两个值是否相等
+        // 1.Object.is(undefined, undefined)
+        // 2.Object.is(null, null)
+        // 3.Object.is(true, true)
+        // 4.字符串长度相等并且排列顺序相等
+        // 5.相同对象的引用相等
+        // 6.都是数字
+        //    6.1 都是 +0
+        //    6.2 都是 -0
+        //    6.3 都是NaN
+        //    6.4 都是非0而且非NaN且为同一个值
+    // 和==等区别 判断相等前对两边的变量(如果它们不是同一类型) 进行强制转换 (这种行为的结果会将 "" == false 判断为 true),
+    // 和===区别， === 运算符 (也包括 == 运算符) 将数字 -0 和 +0 视为相等 ，而将Number.NaN 与NaN视为不相等
+
+</script>
 </html>

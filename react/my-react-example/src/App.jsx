@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Route, Switch, Redirect } from "react-router-dom"
+import { Route, Switch } from "react-router-dom"
 
 import Login from "./views/Login"; 
 import Index from "./views/Index"
@@ -11,8 +11,7 @@ export default class App extends React.Component {
             <Fragment>
                 <Switch>
                     <Route path='/login' component={Login}/>
-                    <PrivateRouter path='/index' component={Index}/>
-                    <Redirect to='/login'/>
+                    <PrivateRouter path='/' component={Index}/>
                 </Switch>
             </Fragment>
         )

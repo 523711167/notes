@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    {
+    //搞个Dome 只可意会
+        //1.网上买票 2.查询订单 3.拿票进站
+        let add = function * (money) {
+            console.log(money);
+            let piao = '123456'
+            let numb = yield piao
+            console.log('numb' ,numb);
+            let status = true
+            let ticket = yield status
+            console.log(ticket);
+            let go = true
+        }
+
+        let iterator = add(100)
+        let numb = iterator.next()
+        console.log(numb);
+        // let status = iterator.next(numb).value
+        // console.log(status);
+        // let go = iterator.next('北京到广州')
+        // console.log(go);
+    }
+
+</script>
+</html>

@@ -1,31 +1,33 @@
 import React, { Fragment } from "react";
-import { Link } from 'react-router-dom'
-
+import { Link, withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 // Route
-import  route  from "../../Route/route.js";
+import route from "../../Route/route.js";
 
 // andt
 import { Menu } from 'antd';
-import {  MailOutlined, ContainerOutlined } from '@ant-design/icons';
+import { MailOutlined, ContainerOutlined } from '@ant-design/icons';
+
+import { addTabAction, onOpenMenuAction } from '@s/action/AsideMenu'
 
 const { SubMenu } = Menu;
-export default class AsideMenu extends React.Component {
-
-    state = {
-        selectedKeys: ['/index'],
-        openKeys: [],
-    }
+class AsideMenu extends React.Component {
 
     componentDidMount() {
-
+        let { history } = this.props
+        history.push('/welcome')
     }
 
-    selectedMenu = ({ item, key, keyPath, domEvent }) => {
-        this.setState({ selectedKeys: [ key ] })
+    // 点击添加标签
+    onClick = ({ item, key, keyPath, domEvent }) => {
+        let { addTab } = this.props
+        let title = domEvent.target.text
+        addTab([{ title, key }], [key])
     }
 
     onOpenChange = (openKeys) => {
-        this.setState({openKeys})
+        let { onOpenMenu } = this.props
+        onOpenMenu(openKeys[openKeys.length - 1] === undefined ? [] : [openKeys[openKeys.length - 1]])
     }
 
     renderMenu = ({ title, key }) => {
@@ -34,12 +36,13 @@ export default class AsideMenu extends React.Component {
         )
     }
 
-    renderSubMenu = ({ title, key, child}) => {
+    renderSubMenu = ({ title, key, child }) => {
         return (
-            <SubMenu 
-                key={key}  
-                icon={<MailOutlined />} 
-                title={title}>
+            <SubMenu
+                key={key}
+                icon={<MailOutlined />}
+                title={title}
+                onTitleClick={this.onTitleClick}>
                 {
                     child.map((item) => {
                         return item.child && item.child.length > 0 ? this.renderSubMenu(item) : this.renderMenu(item)
@@ -50,15 +53,15 @@ export default class AsideMenu extends React.Component {
     }
 
     render() {
-        let { openKeys, selectedKeys } = this.state
+        let { AsideMenu: { selectedKeys, openKeys } } = this.props
         return (
             <Fragment>
-                <Menu 
+                <Menu
                     onOpenChange={this.onOpenChange}
-                    onClick={this.selectedMenu}
+                    onClick={this.onClick}
                     selectedKeys={selectedKeys}
                     openKeys={openKeys}
-                    theme='dark' 
+                    theme='dark'
                     mode="inline">
                     {
                         route && route.map((item) => {
@@ -70,3 +73,30 @@ export default class AsideMenu extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        AsideMenu: state.AsideMenu
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+
+    addTab: (selectMenu, selectedKeys) => {
+        dispatch(addTabAction({
+            data: {
+                selectMenu,
+                selectedKeys
+            }
+        }))
+    },
+    onOpenMenu: (openKeys) => {
+        dispatch(onOpenMenuAction({
+            data: {
+                openKeys
+            }
+        }))
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AsideMenu))

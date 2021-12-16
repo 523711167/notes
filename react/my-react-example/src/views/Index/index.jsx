@@ -2,8 +2,8 @@ import React, { Fragment } from "react";
 
 // component
 import Aside from "./components/Aside";
-import Container from "../../component/Container";
 import Collapse from "../../component/Collapse";
+import TabCom from "@c/Tabs";
 // css
 import './index.scss'
 
@@ -18,9 +18,9 @@ export default class Index extends React.Component {
         collapsed: false
     }
 
-    cbCollapse = (collapse) => {
+    triggerCollapse = (collapsed) => {
         this.setState({
-            collapsed: !collapse
+            collapsed
         })
     }
 
@@ -37,10 +37,10 @@ export default class Index extends React.Component {
                     </Sider>
                     <Layout>
                         <Header className='layout-header'>
-                            <Collapse cbCollapse={this.cbCollapse} />
+                            <Collapse collapsed={collapsed}  triggerCollapse={this.triggerCollapse} />
                         </Header>
-                        <Content className='layout-main'>
-                            <Container />
+                        <Content>
+                            <TabCom />
                         </Content>
                     </Layout>
                 </Layout>

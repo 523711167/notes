@@ -5,7 +5,7 @@ export default files.keys()
                 .filter(item => item.indexOf('Index') === -1 && item.indexOf('Login') === -1)
                 .map(item => {
                     return {
-                        path: `/index/${reg.exec(item).groups.path}`,
+                        path: `/${reg.exec(item).groups.path}`,
                         component: files(item).default
                     }
                 })

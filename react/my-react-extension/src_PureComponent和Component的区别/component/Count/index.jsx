@@ -10,14 +10,18 @@ function Count() {
     React.useEffect(() => {
         // 疑问 todo 这种方式下产生了不正确的结果
         // 不知道为什么一直是输出0
-        console.log(count);
-        setInterval(() => {
-            console.log(count);
-            let addCount = count + 1;
-            setCount(addCount); 
+        console.log('我要开启副作用');
+        let timer = setInterval(() => {
+            console.log(timer, count2);
+            count = count + 1;
+            console.log(timer, count);
+            setCount(); 
         }, 1000)
-
-/* 
+        return () => {
+            console.log('我准备消除副作用');
+            clearInterval(timer)
+        }
+/*  
         // 函数式的setState可以获得正确的返回结果
         // 如何赋值给timer，下次定时任务会覆盖之前的值，导致不会重复启动定时任务
         let timer = setInterval(() => {
@@ -28,7 +32,7 @@ function Count() {
             clearInterval(timer)
         }
          */
-    },[])
+    },[ count2 ])
 
     // 奇怪
     function add() {

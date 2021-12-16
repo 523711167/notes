@@ -1,68 +1,69 @@
-import React from "react";
+import React, { Component, Fragment, useEffect, useState } from "react";
 
-import Loading from "./component/Loading";
 
-export default class App extends React.Component {
 
-    state = {
-        hasRrror: false
-    }
-
-    // 可以捕获子组件发生的错误,在父组件render之前，通过返回值修改state的值。
-    // 1.只能捕获后代组件生命周期的错误
-    // 1.不可以捕获自身组件的错误
-    // 2.子组件的合成事件无法捕获
-    // 3.定时器中的异常也无法捕获
-    static getDerivedStateFromError(error) {
-        console.log('@@@',error)
-        return {hasRrror: true}
-    }
-
-    // 把错误信息发送到服务器，统计错误
-    // 这个函数不是很明白
-    componentDidCatch(err, info) {
-
-    }
+ class App extends React.Component {
 
     render() {
+
+        const Qdfdsfsd = withXy({
+            component: Xybutton,
+        })
         return (
-            <div>
-                <h1>我是App组件，我要控制A组件的错误溢出</h1>
-                {this.state.hasRrror ? <Loading/>  : <A/>}
-                {/* <A /> */}
-            </div>
-        )
+            <>
+                <Qdfdsfsd />
+            </>
+        );
     }
 }
 
+export default App
 
-class A extends React.Component {
 
-    state = {
-        todo: [
-            {id: '1', todo: '打豆豆'},
-            {id: '2', todo: '打呃呃'},
-            {id: '3', todo: '打到底'}
-        ],
-        // todo: "",
-        noTodo: ''
-    }
 
-    add = () => {
-        this.state.noTodo.map(() => undefined)
-    }
+function Xybutton(props) {
 
-    render() {
-        return (
-            <div>
-                {
-                    this.state.todo.map((val) => {
-                        return <li key={val.id}>{val.id}----{val.todo}</li>
-                    })
-                }
-                {/* 点击事件错误不会捕获，生产环境不影响页面，测试环境影响页面 */}
-                <input onClick={this.add} type="button"  value='加一个'/>
-            </div>
-        )
+    return (
+        <Fragment>
+            <div>X轴的坐标为{props.x}</div>
+            <div>Y轴的坐标为{props.y}</div>
+        </Fragment>
+    )
+}
+
+function Xydiv(props) {
+
+    return (
+        <Fragment>
+            <div>X轴的坐标为{props.x}</div>
+            <div>Y轴的坐标为{props.y}</div>
+        </Fragment>
+    )
+}
+
+// 高阶组件就是通过加工组件的方式实现的，很难用语言描述
+function withXy({component: Component}) {
+
+    return function() {
+
+        const [x, setX] = useState(document.documentElement.clientWidth)
+        const [y, setY] = useState(document.documentElement.clientHeight)
+    
+        useEffect(() => {
+            function changeX(){
+                setX(document.documentElement.clientWidth)
+            }
+            function changeY(){
+                setY(document.documentElement.clientHeight)
+            }
+            window.addEventListener('resize', changeX)
+            window.addEventListener('resize', changeY)
+            return () => {
+                window.removeEventListener('resize', changeX)
+                window.removeEventListener('resize', changeY)
+            }
+        }, [x, y])
+
+        return <Component x={x} y={y}/>
     }
 }

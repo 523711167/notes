@@ -7,7 +7,6 @@ import PrivateRouter from '../PrivateRouter/index'
 // View组件
 import paths from './component.js'
 
-
 export default class Container extends React.Component {
     render() {
         return (

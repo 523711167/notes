@@ -73,6 +73,9 @@
     {
         //搞个Dome 只可意会
         //1.网上买票 2.查询订单 3.拿票进站
+        // add(100)返回迭代器对象，不执行代码
+        // iterator.next()代码执行到异地个yield，piao作为返回值返回
+        // 第二次执行iterator.next(numb)，第一个yield返回值是第二次执行iterator.next(numb)的形参，执行到第二次yield
         let add = function * (money) {
             let piao = '123456'
             let numb = yield piao
