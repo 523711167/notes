@@ -27,7 +27,7 @@ function ThemedButton(props) {
     )
 } */
 
-/* 
+/*
 // 第一步 创建ThemeContext
 // 第二步 使用ThemeContext.Provider,value赋值
 // 第三步 通过static 使用ThemeContext
@@ -36,40 +36,63 @@ function ThemedButton(props) {
 // Context.Consumer不是很懂
 let ThemeContext = React.createContext('我代表主题色')
 export default class App extends React.Component {
+
+    state = {
+        err: '我是白色'
+    }
+
     render() {
         return (
             <Fragment>
-                <ThemeContext.Provider value={'我代表主题色'}>
+                <ThemeContext.Provider value={this.state.err}>
                     <ToolBar/>
+                    <button onClick={ () => this.setState({ err: '我是黑色'})} >Provider修改值</button>
                 </ThemeContext.Provider>
             </Fragment>
         )
     }
 }
 
-function ToolBar(props) {
-    return (
-        <Fragment>
-            <ThemeContext.Provider value={'我代表主题色红色'}>
-                <ThemedButton/>
-            </ThemeContext.Provider>
-        </Fragment>
-    )
-}
-
-class ThemedButton extends React.Component {
-
-    static contextType = ThemeContext
+class ToolBar extends React.Component{
+    // ThemeContext.Provider 发生变化，下级组件shouldComponentUpdate不会影响下级组件的render
+    shouldComponentUpdate() {
+        console.log("B-----shouldComponentUpdate")
+        return false 
+    }
 
     render() {
         return (
             <Fragment>
-                <button>{this.context}</button>
+                    <ThemedButton/>
             </Fragment>
         )
     }
-} 
+
+}
 */
+
+// class ThemedButton extends React.Component {
+
+//     // 等价于ThemedButton.contextType = ThemeContext
+//     static contextType = ThemeContext
+
+//     render() {
+//         console.log('@@App')
+//         return (
+//             <Fragment>
+//                 <button>{this.context}</button>
+//             </Fragment>
+//         )
+//     }
+// } 
+// 等效上面那种写法 class组件和函数组件都可以使用，函数组件没有this所以只能使用Comsumer
+// function ThemedButton() {
+//     return (
+//         <ThemeContext.Consumer>
+//             {value => <button>{value}</button>}
+//         </ThemeContext.Consumer>
+//     )
+}
 
 /* // 可以通过props传递react组件
 export default function App(props) {

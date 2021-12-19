@@ -32,6 +32,6 @@ class App extends React.Component {
 // 如果父组件想控制子组件的DOM节点
 // 1.通过ref的转发现实
 // 2.通过props传递React.createRef()，子组件通过ref={props.parentRRef}
-// 3.通过props传递 dom => this.xxxRef = dom函数，自组件通过ref={props.parentRef}
+// 3.通过props传递 dom => this.xxxRef = dom函数,利用了ref的第二种方式，自组件通过ref={props.parentRef}
 // 函数形式在ref在组件挂载的时候会执行2次，第一次传入null值，第二次传入Dom属性，同时props中是没有ref的属性的w
 export default App
